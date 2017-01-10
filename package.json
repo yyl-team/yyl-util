@@ -1,0 +1,25 @@
+{
+  "name": "yyl-util",
+  "version": "1.0.1",
+  "description": "node function util",
+  "main": "lib/util.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackness1208/yyl-util.git"
+  },
+  "keywords": [
+    "util"
+  ],
+  "author": "jackness Lau",
+  "license": "ISC",
+  "engines": {
+    "node": ">= 4.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/jackness1208/yyl-util/issues"
+  },
+  "homepage": "https://github.com/jackness1208/yyl-util#readme"
+}
