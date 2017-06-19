@@ -1,10 +1,10 @@
 {
   "name": "yyl-util",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "node function util",
   "main": "lib/util.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./test/test.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,8 @@
     "url": "https://github.com/jackness1208/yyl-util/issues"
   },
   "homepage": "https://github.com/jackness1208/yyl-util#readme",
-  "devDependencies": {
-    "yyl-color": "^1.0.0"
+  "dependencies": {
+    "yyl-color": "^1.0.0",
+    "node-notifier": "^5.1.2"
   }
 }
