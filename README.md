@@ -25,6 +25,8 @@ util.compareVersion(v1, v2);
  * @param {String}   type     队列唯一识别码, 可不填，默认为 'default'
  * @param {Function} fn(next) 需要进入队列执行的方法
  *                   - next [Function] 执行下一队列方法
+ *
+ * @param {Number} delay      可选参数, 延迟执行， 单位 ms
  */
 util.taskQueue.add(type, fn);
 
