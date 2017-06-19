@@ -2,6 +2,4 @@
 var util = require('../index.js');
 
 
-setInterval(function(){
-    util.pop('helloworld');
-}, 100);
+console.log(util.compareVersion('1.1.0', '~1.0.0'));
