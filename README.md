@@ -4,6 +4,12 @@ a node util for yyl
 ## API 说明
 ```
 /**
+ * 调用系统默认浏览器打开连接
+ * @param {String} url 目标连接
+ */
+util.openBrowser(url);
+
+/**
  * 调出系统及冒泡信息
  * @param {String} str 信息
  */
@@ -38,6 +44,12 @@ util.taskQueue.next(type);
 ```
 
 ## 版本信息
+### 1.3.6(2017-06-22)
+* [EDIT] util.openBrowser() 支持不带协议的 url 打开
+
+### 1.3.5(2017-06-22)
+* [FIX] 修复 util.joinFormat //www.yy.com 类似这样没指定协议的路径时匹配返回不正确问题
+
 ### 1.3.0(2017-06-19)
 * [ADD] 新增 util.taskQueue 方法 用于gulp watch 队列执行
 
