@@ -44,6 +44,9 @@ util.taskQueue.next(type);
 ```
 
 ## 版本信息
+### 1.3.7(2017-06-22)
+* [EDIT] util.runCMD 将 本质执行 exec 设置 maxBuffer为一个极大值
+
 ### 1.3.6(2017-06-22)
 * [EDIT] util.openBrowser() 支持不带协议的 url 打开
 
