@@ -29,12 +29,13 @@ util.compareVersion(v1, v2);
 /**
  * 添加任务队列
  * @param {String}   type     队列唯一识别码, 可不填，默认为 'default'
+ * @param {Function} delay    延迟执行
  * @param {Function} fn(next) 需要进入队列执行的方法
  *                   - next [Function] 执行下一队列方法
  *
  * @param {Number} delay      可选参数, 延迟执行， 单位 ms
  */
-util.taskQueue.add(type, fn);
+util.taskQueue.add(type, fn, delay);
 
 /**
  * 主动触发下一队列任务
@@ -44,6 +45,9 @@ util.taskQueue.next(type);
 ```
 
 ## 版本信息
+### 1.4.0(2017-07-13)
+* [EDIT] util.taskQueue.add 新增 delay 参数
+
 ### 1.3.7(2017-06-22)
 * [EDIT] util.runCMD 将 本质执行 exec 设置 maxBuffer为一个极大值
 
