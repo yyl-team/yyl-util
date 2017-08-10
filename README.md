@@ -32,7 +32,7 @@ util.envStringify(obj);
  * @param  {Array}  argv 数组
  * @return {Object} obj  值对象
  */
-util.envPrase(argv);
+util.envParse(argv);
 
 /**
  * 调用系统默认浏览器打开连接
@@ -315,6 +315,9 @@ util.taskQueue.next(type);
 ```
 
 ## 版本信息
+### 1.4.2(2017-08-10)
+* [FIX] util.envPrase => util.envParse
+
 ### 1.4.1(2017-08-10)
 * [EDIT] 补完 readme api 文档
 
