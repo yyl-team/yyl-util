@@ -192,14 +192,15 @@ util.help(op);
 
 /**
  * 错误输出
- * @param  {Object}        type {key: color} 需要新增的类型
- * @param  {String}        key               新增的 util.msg[name]
- * @param  {String|Object} color             新增的 log 的颜色 可以是 hex 如 #ffffff, 也可以是命名如 red
- * @param  {String}        color.name        输出展示的名字，默认与 key 一致
- * @param  {String}        color.color       新增的 log 的颜色 可以是 hex 如 #ffffff, 也可以是命名如 red
+ * @param  {Object}        op.maxSize           最大字符长度，默认会随 type 字符长度而递增
+ * @param  {Object}        op.type {key: color} 需要新增的类型
+ * @param  {String}        key                  新增的 util.msg[name]
+ * @param  {String|Object} color                新增的 log 的颜色 可以是 hex 如 #ffffff, 也可以是命名如 red
+ * @param  {String}        color.name           输出展示的名字，默认与 key 一致
+ * @param  {String}        color.color          新增的 log 的颜色 可以是 hex 如 #ffffff, 也可以是命名如 red
  * @return {Void}
  */
-util.msg.init(type)
+util.msg.init(op)
 
 /**
  * 错误输出
