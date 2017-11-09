@@ -1,6 +1,6 @@
 {
   "name": "yyl-util",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "node function util",
   "main": "lib/util.js",
   "scripts": {
@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/jackness1208/yyl-util#readme",
   "dependencies": {
-    "yyl-color": "^1.0.0",
+    "chalk": "^2.3.0",
     "node-notifier": "^5.1.2"
   }
 }

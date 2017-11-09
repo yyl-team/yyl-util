@@ -192,10 +192,22 @@ util.help(op);
 
 /**
  * 错误输出
+ * @param  {Object}        type {key: color} 需要新增的类型
+ * @param  {String}        key               新增的 util.msg[name]
+ * @param  {String|Object} color             新增的 log 的颜色 可以是 hex 如 #ffffff, 也可以是命名如 red
+ * @param  {String}        color.name        输出展示的名字，默认与 key 一致
+ * @param  {String}        color.color       新增的 log 的颜色 可以是 hex 如 #ffffff, 也可以是命名如 red
+ * @return {Void}
+ */
+util.msg.init(type)
+
+/**
+ * 错误输出
  * @param  {String} txt 文本内容
  * @return {Void}
  */
 util.msg.error()
+
 
 /**
  * 信息输出
@@ -333,6 +345,9 @@ throttle: function(func, wait, options);
 ```
 
 ## 版本信息
+### 1.6.0(2017-11-09)
+* [ADD] 新增 `util.msg.init(type)` 方法
+
 ### 1.5.0(2017-10-24)
 * [ADD] 新增 `util.debounce`, `util.throttle` 方法
 
