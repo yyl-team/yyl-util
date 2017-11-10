@@ -137,8 +137,11 @@ util.Promise(fn)
 
 /**
  * 获取目录下所有文件路径
- * @param {String} iPath  文件目录
- * @param {Regex}  filter 文件过滤正则
+ * @param  {String}          iPath            文件目录
+ * @param  {Regex|Function}  filter           文件过滤正则
+ *                           filter(filePath) 文件过滤函数 返回 true 则加入到返回列表
+ * @param  {String}          filePath         文件目录
+ * @return {Array}           files            文件列表
  */
 util.readFilesSync(iPath, filter);
 /**
