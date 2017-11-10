@@ -195,10 +195,23 @@ util.help(op);
 
 /**
  * 错误输出
+ * @param  {Object}        op.maxSize           最大字符长度，默认会随 type 字符长度而递增
+ * @param  {Object}        op.type {key: color} 需要新增的类型
+ * @param  {String}        key                  新增的 util.msg[name]
+ * @param  {String|Object} color                新增的 log 的颜色 可以是 hex 如 #ffffff, 也可以是命名如 red
+ * @param  {String}        color.name           输出展示的名字，默认与 key 一致
+ * @param  {String}        color.color          新增的 log 的颜色 可以是 hex 如 #ffffff, 也可以是命名如 red
+ * @return {Void}
+ */
+util.msg.init(op)
+
+/**
+ * 错误输出
  * @param  {String} txt 文本内容
  * @return {Void}
  */
 util.msg.error()
+
 
 /**
  * 信息输出
@@ -315,9 +328,39 @@ util.taskQueue.add(type, fn, delay);
  * @param {String}   type     队列唯一识别码, 可不填，默认为 'default'
  */
 util.taskQueue.next(type);
+
+/**
+ * 直到 (wait)ms 后不再触发事件，则执行 func，确保不会连续多次调用函数，
+ * 通常用于resize，scroll 等频繁触发事件
+ * [Reference] https://davidwalsh.name/javascript-debounce-function
+ * @param  {[Function]} func      [事件回调函数]
+ * @param  {[Number]}   wait      [间隔]
+ * @param  {[type]}     immediate [description]
+ * @return {[Function]}           [延迟触发的函数]
+ */
+debounce: function (func, wait, immediate);
+
+// Returns a function, that, when invoked, will only be triggered at most once
+// during a given window of time. Normally, the throttled function will run
+// as much as it can, without ever going more than once per `wait` duration;
+// but if you'd like to disable the execution on the leading edge, pass
+// `{leading: false}`. To disable execution on the trailing edge, ditto.
+throttle: function(func, wait, options);
 ```
 
 ## 版本信息
+### 1.6.4(2017-11-10)
+* [ADD] 新增 `util.readFilesSync(path, filter)` 中 filter 的 类型
+
+### 1.6.0(2017-11-09)
+* [ADD] 新增 `util.msg.init(type)` 方法
+
+### 1.5.0(2017-10-24)
+* [ADD] 新增 `util.debounce`, `util.throttle` 方法
+
+### 1.4.3(2017-09-14)
+* [FIX] util.envStringify bugfix
+
 ### 1.4.2(2017-08-10)
 * [FIX] util.envPrase => util.envParse
 
