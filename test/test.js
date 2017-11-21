@@ -1,11 +1,22 @@
 'use strict';
-var util = require('../index.js');
+var 
+    util = require('../index.js'),
+    expect = require('chai').expect,
+    path = require('path');
+
+describe('util.readdirSync(iPath, filter)', function(){
+    it('function test', function(){
+        expect(util.readdirSync(path.join(__dirname, '../'), /node_modules/)).to.not.include('node_modules');
+    });
+});
+
+describe('util.envStringify(obj)', function(){
+    it('function test', function(){
+        expect(util.envStringify({name: 'sub'})).to.equal('--name sub');
+        expect(util.envStringify({name: true})).to.equal('--name true');
+        expect(util.envStringify({name: 123})).to.equal('--name 123');
+    });
+});
 
 
-util.msg.success('111');
-util.msg.error('111');
-util.msg.info('111');
-util.msg.create('111');
-util.msg.warn('111');
-util.msg.del('111');
-util.msg.notice([1,2,3], 'aaa', {key:1, key2: 2});
+

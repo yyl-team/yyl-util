@@ -4,7 +4,7 @@
   "description": "node function util",
   "main": "lib/util.js",
   "scripts": {
-    "test": "node ./test/test.js"
+    "test": "mocha ./test/test.js"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,8 @@
   "dependencies": {
     "chalk": "^2.3.0",
     "node-notifier": "^5.1.2"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2"
   }
 }

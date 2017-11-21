@@ -4,16 +4,6 @@ a node util for yyl
 ## API 说明
 ```
 /**
- * yyl 用本地服务器用 livereload 功能
- */
-util.livereload();
-
-/**
- * yyl 用 config 初始化方法
- */
-util.initConfig(config);
-
-/**
  * 读取文件目录
  * @param {String} iPath 目录路径
  * @param {REGEX}  filter 忽略目录的正则表达式
