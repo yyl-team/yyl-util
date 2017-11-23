@@ -438,6 +438,7 @@ describe('util.msg', function() {
         expect(util.msg.test04('test 04'));
         expect(util.msg.test05('test 05'));
         expect(util.msg.test06('test 06'));
+        
 
     });
 
@@ -484,6 +485,15 @@ describe('util.msg', function() {
         expect(util.msg.create({
             'test': 'msg'
         }));
+    });
+
+    it('other test', function(){
+        expect(util.msg.replace('aaa'));
+        expect(util.msg.replace('bbb'));
+        expect(util.msg.line());
+        expect(util.msg.newline());
+        expect(util.msg.nowrap('testtesttesttesttesttesttesttesttesttesttest'));
+
     });
 
 });
@@ -824,19 +834,18 @@ describe('util.debounce(func, wait, immediate)', function() {
             padding--;
             util.debounce(function(){
                 r++;
-            }, 30)();
+                if(!padding){
+                    padding--;
+                    expect(r).to.equal(2);
+                    done();
+                }
+            }, 40)();
 
             if(!padding){
                 clearInterval(key);
-                expect(r).to.equal(2);
-                done();
             }
 
         }, 10);
 
     });
-});
-
-describe('util.throttle(func, wait, options)', function() {
-    // TODO
 });

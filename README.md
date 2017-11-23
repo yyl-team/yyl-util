@@ -329,16 +329,12 @@ util.taskQueue.next(type);
  * @return {[Function]}           [延迟触发的函数]
  */
 debounce: function (func, wait, immediate);
-
-// Returns a function, that, when invoked, will only be triggered at most once
-// during a given window of time. Normally, the throttled function will run
-// as much as it can, without ever going more than once per `wait` duration;
-// but if you'd like to disable the execution on the leading edge, pass
-// `{leading: false}`. To disable execution on the trailing edge, ditto.
-throttle: function(func, wait, options);
 ```
 
 ## 版本信息
+### 1.7.0(2017-11-23)
+* [ADD] 引入 `mocha` 单元测试
+
 ### 1.6.4(2017-11-10)
 * [ADD] 新增 `util.readFilesSync(path, filter)` 中 filter 的 类型
 
