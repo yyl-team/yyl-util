@@ -71,9 +71,9 @@ describe('util.envParse(argv)', function() {
 });
 
 describe('util.openBrowser(address)', function() {
-    it('useage test', function() {
-        expect(util.openBrowser('http://www.yy.com'));
-    });
+    // it('useage test', function() {
+    //     expect(util.openBrowser('http://www.yy.com'));
+    // });
 });
 
 describe('util.buildTree(op)', function() {
@@ -136,9 +136,9 @@ describe('util.makeCssJsDate()', function() {
 });
 
 describe('util.openPath(iPath)', function() {
-    it('useage test', function() {
-        expect(util.openPath(__dirname));
-    });
+    // it('useage test', function() {
+    //     expect(util.openPath(__dirname));
+    // });
 });
 
 describe('util.joinFormat()', function() {
@@ -849,3 +849,258 @@ describe('util.debounce(func, wait, immediate)', function() {
 
     });
 });
+
+describe('util.md2JSON(iPath)', function() {
+    var cases = [{ // 标准文件
+            testName: 'standard test',
+            content: [
+                '# title h1',
+                '## title h2',
+                '### title h3',
+                '#### title h4',
+                '##### title h5',
+                '###### title h6',
+                'normal text01',
+                'normal text02',
+                'normal text03',
+                '* list 01',
+                '* list 02',
+                '* list 03',
+                '1. num-list01',
+                '2. num-list02',
+                '3. num-list03'
+            ].join('\r\n'),
+            result: {
+                type: "root",
+                children: [{
+                    type: 'h1',
+                    ctx: 'title h1',
+                    contents: [],
+                    children: [{
+                        type: 'h2',
+                        ctx: 'title h2',
+                        contents: [],
+                        children: [{
+                            type: 'h3',
+                            ctx: 'title h3',
+                            contents: [],
+                            children: [{
+                                type: 'h4',
+                                ctx: 'title h4',
+                                contents: [],
+                                children: [{
+                                    type: 'h5',
+                                    ctx: 'title h5',
+                                    contents: [],
+                                    children: [{
+                                        type: 'h6',
+                                        ctx: 'title h6',
+                                        contents: [{
+                                            type: 'text',
+                                            ctx: [
+                                                'normal text01',
+                                                'normal text02',
+                                                'normal text03',
+                                            ]
+                                        }, {
+                                            type: 'list',
+                                            ctx: [
+                                                'list 01',
+                                                'list 02',
+                                                'list 03'
+                                            ]
+
+                                        }, {
+                                            type: 'num-list',
+                                            ctx: [
+                                                'num-list01',
+                                                'num-list02',
+                                                'num-list03'
+                                            ]
+                                        }],
+                                        children: []
+
+                                    }]
+
+                                }]
+
+                            }]
+                        }]
+
+                    }]
+                }]
+
+            }
+        }, { // 空文件
+            testName: 'blank file test',
+            content: [].join('\r\n'),
+            result: {
+                type: 'root',
+                children: []
+            }
+        }, {
+            testName: 'siblings test',
+            content: [
+                '# h101',
+                '# h102',
+                'hello text'
+            ].join('\r\n'),
+            result: {
+                type: 'root',
+                children: [{
+                    type: 'h1',
+                    ctx: 'h101',
+                    contents: [],
+                    children: []
+
+                }, {
+                    type: 'h1',
+                    ctx: 'h102',
+                    contents: [{
+                        type: 'text',
+                        ctx: ['hello text']
+                    }],
+                    children: []
+
+                }]
+            }
+        }, {
+            testName: 'h1 hide(h2) h3 test',
+            content: [
+                '# h1',
+                '### h301',
+                '### h302',
+                '## h2'
+            ].join('\n'),
+            result: {
+                type: 'root',
+                children: [{
+                    type: 'h1',
+                    ctx: 'h1',
+                    contents: [],
+                    children: [{
+                        type: 'h2',
+                        ctx: '',
+                        contents: [],
+                        children: [{
+                            type: 'h3',
+                            ctx: 'h301',
+                            contents: [],
+                            children: []
+
+                        }, {
+                            type: 'h3',
+                            ctx: 'h302',
+                            contents: [],
+                            children: []
+
+                        }]
+                    }, {
+                        type: 'h2',
+                        ctx: 'h2',
+                        contents: [],
+                        children: []
+                    }]
+
+                }]
+            }
+
+        }, {
+            testName: 'script test',
+            content: [
+                '# h1',
+                '```javascript',
+                '### line1',
+                '## line2',
+                '```',
+                '```javascript',
+                '### line3',
+                '## line4',
+                '```',
+                'hello text'
+            ].join('\n'),
+            result: {
+                type: 'root',
+                children: [{
+                    type: 'h1',
+                    ctx: 'h1',
+                    contents: [{
+                        type: 'script',
+                        syntax: 'javascript',
+                        ctx: [
+                            '### line1',
+                            '## line2'
+                        ]
+                    }, {
+                        type: 'script',
+                        syntax: 'javascript',
+                        ctx: [
+                            '### line3',
+                            '## line4'
+                        ]
+                    }, {
+                        type: 'text',
+                        ctx: [
+                            'hello text'
+                        ]
+                    }],
+                    children: []
+                }]
+            }
+
+        }, {
+            testName: 'h1 h2 style02 test',
+            content: [
+                'h1',
+                '===',
+                '# h2',
+                '-----------------',
+                'hello text'
+            ].join('\n'),
+            result: {
+                type: 'root',
+                children: [{
+                    type: 'h1',
+                    ctx: 'h1',
+                    contents: [],
+                    children: [{
+                        type: 'h2',
+                        ctx: '# h2',
+                        contents: [{
+                            type: 'text',
+                            ctx: ['hello text']
+                        }],
+                        children: []
+                    }]
+                }]
+            }
+
+        }];
+
+    
+
+    cases.forEach(function(item){
+        if(!item.testName){
+            return;
+        }
+
+        it(item.testName, function(done){
+            // 创建 md
+            util.mkdirSync(FRAG_PATH);
+            util.removeFiles(FRAG_PATH);
+            var mdPath = path.join(FRAG_PATH, '1.md');
+            fs.writeFileSync(mdPath, item.content);
+
+            util.md2JSON(mdPath);
+            expect(util.md2JSON(mdPath)).to.deep.equal(item.result);
+
+            util.removeFiles(FRAG_PATH, true);
+            done();
+
+        });
+        
+    });
+    
+});
+
+
