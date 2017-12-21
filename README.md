@@ -139,22 +139,27 @@ util.readFilesSync(iPath, filter);
  * ------------
  * 单个文本方法
  * -------------
- * @param  {String}   path
- * @param  {String}   toPath
- * @param  {function} callback
- * @param  {RegExp}   filters
- * @param  {function} render
+ * @param  {String}          path
+ * @param  {String}          toPath
+ * @param  {function}        callback
+ * @param  {RegExp|function} filters
+ * @param  {function}        render
+ * @param  {string}          basePath
  *
  * --------------
  * 多个目录/文件方法
  * --------------
- * @param  {Object}   list
- * @param  {function} callback 回调方法
- * @param  {RegExp}   filters  忽略文件用 滤镜，选填参数
- * @param  {function} render   文本渲染用方法
- *                             - @param {String}  filename 文件名称
- *                             - @param {String}  content  文件内容
- *                             - @return {String} content  过滤后的文本内容
+ * @param  {Object}            list
+ * @param  {function}        callback 回调方法
+ * @param  {RegExp|function} filters  忽略文件用 滤镜
+ *                           filters(iPath)                过滤函数
+ *                           - @param  {String}  iPath     文件路径
+ *                           - @return {Boolean} isInclude 是否包含在内， false 则表示 ignore
+
+ * @param  {function}        render(filename, content)    文本渲染用方法
+ *                           - @param  {String}  filename 文件名称
+ *                           - @param  {String}  content  文件内容
+ *                           - @return {String}  content  过滤后的文本内容
  * @return {Void}
  */
 util.copyFiles(list, callback, filters, render, basePath);
@@ -336,3 +341,8 @@ util.debounce: function (func, wait, immediate);
  */
 util.md2JSON: function(iPath);
 ```
+
+
+## 历史记录
+在 [这里](./history.md)
+

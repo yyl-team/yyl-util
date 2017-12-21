@@ -1,4 +1,8 @@
 # 版本信息
+## 1.9.0(2017-12-21)
+* [EDIT] `util.copyFiles(file, toFile, callback, filter, render, basePath)` 中的 `filter` 支持 函数形式
+* [EDIT] `util.copyFiles(file, toFile, callback, filter, render, basePath)` 中的 `filter` 如配置有 `basePath` 参数， 则过滤的 路径 为 相对于 `basePath` 的路径
+
 ## 1.8.0(2017-12-05)
 * [ADD] 新增 `util.md2JSON(iPath)` 方法
 

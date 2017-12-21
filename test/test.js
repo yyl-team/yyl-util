@@ -7,7 +7,33 @@ var
     FRAG_PATH = path.join(__dirname, '../frag'),
     FRAG_PATH2 = path.join(__dirname, '../frag2');
 
+var 
+    fn = {
+        frag: {
+            build: function(){
+                if(!fs.existsSync(FRAG_PATH)){
+                    util.mkdirSync(FRAG_PATH);
+                }
+                util.removeFiles(FRAG_PATH);
 
+                if(!fs.existsSync(FRAG_PATH2)){
+                    util.mkdirSync(FRAG_PATH2);
+                }
+                util.removeFiles(FRAG_PATH2);
+            },
+            destory: function(){
+                if(fs.existsSync(FRAG_PATH)){
+                    util.removeFiles(FRAG_PATH, true);
+                }
+
+                if(fs.existsSync(FRAG_PATH2)){
+                    util.removeFiles(FRAG_PATH2, true);
+                }
+
+            }
+        }
+
+    };
 
 describe('util.readdirSync(iPath, filter)', function() {
     it('usage test', function() {
@@ -102,14 +128,15 @@ describe('util.buildTree(op)', function() {
 
 describe('util.findPathSync(iPath, root, filter, ignoreHide)', function() {
     it('useage test', function() {
-        util.mkdirSync(FRAG_PATH);
-        util.removeFiles(FRAG_PATH);
+        fn.frag.build();
 
         fs.writeFileSync(path.join(FRAG_PATH, '01.txt'), '123');
         fs.writeFileSync(path.join(FRAG_PATH, '02.txt'), '123');
         fs.writeFileSync(path.join(FRAG_PATH, '03.txt'), '123');
         fs.writeFileSync(path.join(FRAG_PATH, '04.txt'), '123');
         expect(util.findPathSync('test.js', FRAG_PATH, /02\.txt/, true));
+
+        fn.frag.destory();
     });
 });
 
@@ -121,11 +148,9 @@ describe('util.requireJs(iPath)', function() {
 
 describe('util.mkdirSync(toFile)', function() {
     it('useage test', function() {
-        util.mkdirSync(FRAG_PATH);
-        util.removeFiles(FRAG_PATH);
-
+        fn.frag.build();
         expect(util.mkdirSync(path.join(FRAG_PATH, '1/2/3/4/5/6/7')));
-        util.removeFiles(path.join(FRAG_PATH), true);
+        fn.frag.destory();
     });
 });
 
@@ -268,33 +293,32 @@ describe('util.Promise()', function() {
 
 describe('util.readFilesSync(iPath, filter)', function() {
     it('useage test', function() {
-        util.mkdirSync(FRAG_PATH);
-        util.removeFiles(FRAG_PATH);
+        fn.frag.build();
         fs.writeFileSync(path.join(FRAG_PATH, '01.txt'), '123');
         expect(util.readFilesSync(FRAG_PATH)).to.deep.equal([util.joinFormat(FRAG_PATH, '01.txt')]);
-        util.removeFiles(path.join(__dirname, '../frag'), true);
+        fn.frag.destory();
     });
     it('filter regex test', function() {
         expect(util.readFilesSync(path.join(__dirname, '../node_modules'), /^(?!.*?node_modules).*$/).length).to.equal(0);
     });
 
     it('filter function test', function() {
-        util.mkdirSync(FRAG_PATH);
-        util.removeFiles(FRAG_PATH);
+        fn.frag.build();
+
         fs.writeFileSync(path.join(FRAG_PATH, '01.txt'), '123');
         fs.writeFileSync(path.join(FRAG_PATH, '02.txt'), '123');
         fs.writeFileSync(path.join(FRAG_PATH, '03.txt'), '123');
         expect(util.readFilesSync(path.join(__dirname, '../frag'), function(iPath) {
             return /01\.txt/.test(iPath);
         }).length).to.equal(1);
+
+        fn.frag.destory();
     });
 });
 
 describe('util.copyFiles(list, callback, filters, render, basePath)', function() {
     it('util.copyFiles(list, callback) test', function(done) {
-        util.mkdirSync(FRAG_PATH);
-        util.mkdirSync(FRAG_PATH2);
-        util.removeFiles([FRAG_PATH, FRAG_PATH2]);
+        fn.frag.build();
 
         fs.writeFileSync(path.join(FRAG_PATH, '01.txt'), '123');
 
@@ -302,14 +326,13 @@ describe('util.copyFiles(list, callback, filters, render, basePath)', function()
         obj[path.join(FRAG_PATH, '01.txt')] = [path.join(FRAG_PATH2, '01.txt'), path.join(FRAG_PATH2, '02.txt')];
         util.copyFiles(obj, function() {
             expect(fs.existsSync(path.join(FRAG_PATH2, '01.txt')) && fs.existsSync(path.join(FRAG_PATH2, '02.txt'))).to.equal(true);
-            util.removeFiles(FRAG_PATH2, true);
+
+            fn.frag.destory();
             done();
         });
     });
     it('util.copyFiles(fromFile, toFile, callback) test', function(done) {
-        util.mkdirSync(FRAG_PATH);
-        util.mkdirSync(FRAG_PATH2);
-        util.removeFiles([FRAG_PATH, FRAG_PATH2]);
+        fn.frag.build();
 
         fs.writeFileSync(path.join(FRAG_PATH, '01.txt'), '123');
 
@@ -318,16 +341,15 @@ describe('util.copyFiles(list, callback, filters, render, basePath)', function()
             path.join(FRAG_PATH2, '01.txt'),
             function() {
                 expect(fs.existsSync(path.join(FRAG_PATH2, '01.txt'))).to.equal(true);
-                util.removeFiles([FRAG_PATH, FRAG_PATH2], true);
+
+                fn.frag.destory();
                 done();
             }
         );
     });
 
-    it('util.copyFiles(fromFile, toFile, callback, filters) test', function(done) {
-        util.mkdirSync(FRAG_PATH);
-        util.mkdirSync(FRAG_PATH2);
-        util.removeFiles([FRAG_PATH, FRAG_PATH2]);
+    it('util.copyFiles(fromFile, toFile, callback, filters-regExp) test', function(done) {
+        fn.frag.build();
 
         fs.writeFileSync(path.join(FRAG_PATH, '01.txt'), '123');
         fs.writeFileSync(path.join(FRAG_PATH, '02.txt'), '123');
@@ -337,17 +359,39 @@ describe('util.copyFiles(list, callback, filters, render, basePath)', function()
             FRAG_PATH2,
             function() {
                 expect(fs.existsSync(path.join(FRAG_PATH2, '01.txt')) && !fs.existsSync(path.join(FRAG_PATH2, '02.txt'))).to.equal(true);
-                util.removeFiles([FRAG_PATH, FRAG_PATH2], true);
+                fn.frag.destory();
                 done();
             },
             /02\.txt$/
         );
     });
 
+    it('util.copyFiles(fromFile, toFile, callback, filters-function) test', function(done) {
+        fn.frag.build();
+
+        fs.writeFileSync(path.join(FRAG_PATH, '01.txt'), '123');
+        fs.writeFileSync(path.join(FRAG_PATH, '02.txt'), '123');
+
+        util.copyFiles(
+            FRAG_PATH,
+            FRAG_PATH2,
+            function() {
+                expect(fs.existsSync(path.join(FRAG_PATH2, '01.txt')) && !fs.existsSync(path.join(FRAG_PATH2, '02.txt'))).to.equal(true);
+                fn.frag.destory();
+                done();
+            },
+            function(iPath) {
+                if(/02\.txt$/.test(iPath)){
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        );
+    });
+
     it('util.copyFiles(fromFile, toFile, callback, filters, render) test', function(done) {
-        util.mkdirSync(FRAG_PATH);
-        util.mkdirSync(FRAG_PATH2);
-        util.removeFiles([FRAG_PATH, FRAG_PATH2]);
+        fn.frag.build();
 
         fs.writeFileSync(path.join(FRAG_PATH, '01.txt'), '1');
 
@@ -357,7 +401,7 @@ describe('util.copyFiles(list, callback, filters, render, basePath)', function()
             function() {
                 expect(fs.readFileSync(path.join(FRAG_PATH2, '01.txt')).toString()).to.equal('101.txt');
                 expect(fs.readFileSync(path.join(FRAG_PATH, '01.txt')).toString()).to.equal('1');
-                util.removeFiles([FRAG_PATH, FRAG_PATH2], true);
+                fn.frag.destory();
                 done();
             },
             null,
@@ -366,6 +410,27 @@ describe('util.copyFiles(list, callback, filters, render, basePath)', function()
             }
         );
 
+    });
+
+    it('util.copyFiles(fromFile, toFile, callback, filters, null, basePath) test', function(done) {
+        fn.frag.build();
+        fs.writeFileSync(path.join(FRAG_PATH, '01.txt'), '123');
+
+        util.copyFiles(
+            FRAG_PATH,
+            FRAG_PATH2,
+            function() {
+                expect(fs.existsSync(path.join(FRAG_PATH2, '01.txt'))).to.equal(true);
+                fn.frag.destory();
+                done();
+            },
+            /frag/,
+            null,
+            FRAG_PATH
+        );
+
+        // TODO
+        done();
     });
 });
 
@@ -1085,16 +1150,15 @@ describe('util.md2JSON(iPath)', function() {
         }
 
         it(item.testName, function(done){
+            fn.frag.build();
             // 创建 md
-            util.mkdirSync(FRAG_PATH);
-            util.removeFiles(FRAG_PATH);
             var mdPath = path.join(FRAG_PATH, '1.md');
             fs.writeFileSync(mdPath, item.content);
 
             util.md2JSON(mdPath);
             expect(util.md2JSON(mdPath)).to.deep.equal(item.result);
 
-            util.removeFiles(FRAG_PATH, true);
+            fn.frag.destory();
             done();
 
         });
