@@ -145,6 +145,7 @@ util.readFilesSync(iPath, filter);
  * @param  {RegExp|function} filters
  * @param  {function}        render
  * @param  {string}          basePath
+ * @param  {Boolean}         silent
  *
  * --------------
  * 多个目录/文件方法
@@ -160,9 +161,12 @@ util.readFilesSync(iPath, filter);
  *                           - @param  {String}  filename 文件名称
  *                           - @param  {String}  content  文件内容
  *                           - @return {String}  content  过滤后的文本内容
+ *
+ * @param  {string}          basePath 相对路径
+ * @param  {Boolean}         silent   是否隐藏 log
  * @return {Void}
  */
-util.copyFiles(list, callback, filters, render, basePath);
+util.copyFiles(list, callback, filters, render, basePath, silent);
 
 /**
  * 计时器相关函数
