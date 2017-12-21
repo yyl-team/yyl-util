@@ -4,8 +4,8 @@ var
     expect = require('chai').expect,
     path = require('path'),
     fs = require('fs'),
-    FRAG_PATH = path.join(__dirname, '../frag'),
-    FRAG_PATH2 = path.join(__dirname, '../frag2');
+    FRAG_PATH = path.join(__dirname, 'frag'),
+    FRAG_PATH2 = path.join(__dirname, 'frag2');
 
 var 
     fn = {
@@ -308,7 +308,7 @@ describe('util.readFilesSync(iPath, filter)', function() {
         fs.writeFileSync(path.join(FRAG_PATH, '01.txt'), '123');
         fs.writeFileSync(path.join(FRAG_PATH, '02.txt'), '123');
         fs.writeFileSync(path.join(FRAG_PATH, '03.txt'), '123');
-        expect(util.readFilesSync(path.join(__dirname, '../frag'), function(iPath) {
+        expect(util.readFilesSync(FRAG_PATH, function(iPath) {
             return /01\.txt/.test(iPath);
         }).length).to.equal(1);
 
@@ -369,19 +369,19 @@ describe('util.copyFiles(list, callback, filters, render, basePath)', function()
     it('util.copyFiles(fromFile, toFile, callback, filters-function) test', function(done) {
         fn.frag.build();
 
-        fs.writeFileSync(path.join(FRAG_PATH, '01.txt'), '123');
-        fs.writeFileSync(path.join(FRAG_PATH, '02.txt'), '123');
+        fs.writeFileSync(path.join(FRAG_PATH, '03.txt'), '123');
+        fs.writeFileSync(path.join(FRAG_PATH, '04.txt'), '123');
 
         util.copyFiles(
             FRAG_PATH,
             FRAG_PATH2,
             function() {
-                expect(fs.existsSync(path.join(FRAG_PATH2, '01.txt')) && !fs.existsSync(path.join(FRAG_PATH2, '02.txt'))).to.equal(true);
+                expect(fs.existsSync(path.join(FRAG_PATH2, '03.txt')) && !fs.existsSync(path.join(FRAG_PATH2, '04.txt'))).to.equal(true);
                 fn.frag.destory();
                 done();
             },
             function(iPath) {
-                if(/02\.txt$/.test(iPath)){
+                if(/04\.txt$/.test(iPath)){
                     return false;
                 } else {
                     return true;
@@ -561,6 +561,35 @@ describe('util.msg', function() {
 
     });
 
+    it('util.msg.line() test', function(){
+        expect(util.msg.line());
+    });
+
+    it('util.msg.line().success() test', function(){
+        expect(util.msg.line().success('123'));
+    });
+
+    it('util.msg.newline() test', function(){
+        expect(util.msg.newline());
+    });
+
+    it('util.msg.newline().success() test', function(){
+        expect(util.msg.newline().success('123'));
+    });
+
+    it('util.msg.nowrap(txt, isNewLine) test', function(){
+        expect(util.msg.nowrap('123', true));
+    });
+
+    it('util.msg.nowrap(txt, isNewLine).success() test', function(){
+        expect(util.msg.nowrap('123', true).success('123'));
+    });
+    
+
+    it('util.msg.silent(bool) test', function(){
+        expect(util.msg.silent(true));
+        expect(util.msg.silent(false));
+    });
 });
 
 

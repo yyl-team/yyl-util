@@ -205,6 +205,13 @@ util.help(op);
 util.msg.init(op)
 
 /**
+ * 设置是否禁止输出 util.msg
+ * @param {Boolean} bool 是否禁止 util.msg 输出
+ */
+util.msg.silent(bool);
+
+
+/**
  * 错误输出
  * @param  {String} txt 文本内容
  * @return {Void}

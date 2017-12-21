@@ -1,8 +1,10 @@
 # 版本信息
-## 1.9.1(2017-12-21)
+## 1.9.2(2017-12-21)
 * [EDIT] `util.copyFiles(file, toFile, callback, filter, render, basePath, silent)` 中的 `filter` 支持 函数形式
 * [EDIT] `util.copyFiles(file, toFile, callback, filter, render, basePath, silent)` 中的 `filter` 如配置有 `basePath` 参数， 则过滤的 路径 为 相对于 `basePath` 的路径
 * [ADD] `util.copyFiles(file, toFile, callback, filter, render, basePath, silent)` 新增 `silent` 属性
+* [FIX] `util.copyFiles(file, toFile, callback, filter, render, basePath, silent)` 拷贝文件有时候会出现先回调后进行拷贝文件的问题
+* [ADD] 新增 `util.msg.silent(bool)` 方法
 
 ## 1.8.0(2017-12-05)
 * [ADD] 新增 `util.md2JSON(iPath)` 方法
