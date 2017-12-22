@@ -351,6 +351,13 @@ util.debounce: function (func, wait, immediate);
  * @return {Object} result json 格式 对象
  */
 util.md2JSON: function(iPath);
+
+/**
+ * 同 path.join(), path.relative(), path.resolve() 但多了路径纠正逻辑
+ */
+util.path.join()
+util.path.relative()
+util.path.resolve()
 ```
 
 

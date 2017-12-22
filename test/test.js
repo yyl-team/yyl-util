@@ -1196,4 +1196,28 @@ describe('util.md2JSON(iPath)', function() {
     
 });
 
+describe('util.path.join() test', function() {
+    it('web url test', function() {
+        expect(util.path.join('http://www.yy.com/991')).to.equal('http://www.yy.com/991');
+        expect(util.path.join('https://www.yy.com/991')).to.equal('https://www.yy.com/991');
+        expect(util.path.join('//www.yy.com/991')).to.equal('//www.yy.com/991');
+    });
+    it('file path test', function() {
+        expect(util.path.join('./../test/test.js')).to.equal('./../test/test.js');
+        expect(util.path.join('.\\..\\test\\test.js')).to.equal('./../test/test.js');
+    });
+});
 
+describe('util.path.relative() test', function() {
+    it('file path test', function(){
+        expect(util.path.relative('./../test/', './../test2/1.md')).to.equal('../test2/1.md');
+        expect(util.path.relative('.\\..\\test\\', '.\\..\\test2\\1.md')).to.equal('../test2/1.md');
+    });
+});
+
+describe('util.path.resolve() test', function() {
+    it('file path test', function(){
+        expect(util.path.relative('./../test/', './../test2/1.md')).to.equal('../test2/1.md');
+        expect(util.path.relative('.\\..\\test\\', '.\\..\\test2\\1.md')).to.equal('../test2/1.md');
+    });
+});

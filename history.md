@@ -1,4 +1,9 @@
 # 版本信息
+## 1.9.3(2017-12-22)
+* [ADD] 新增 `util.path.join()` 方法
+* [ADD] 新增 `util.path.relative()` 方法
+* [ADD] 新增 `util.path.resolve()` 方法
+
 ## 1.9.2(2017-12-21)
 * [EDIT] `util.copyFiles(file, toFile, callback, filter, render, basePath, silent)` 中的 `filter` 支持 函数形式
 * [EDIT] `util.copyFiles(file, toFile, callback, filter, render, basePath, silent)` 中的 `filter` 如配置有 `basePath` 参数， 则过滤的 路径 为 相对于 `basePath` 的路径
