@@ -1221,3 +1221,55 @@ describe('util.path.resolve() test', function() {
         expect(util.path.relative('.\\..\\test\\', '.\\..\\test2\\1.md')).to.equal('../test2/1.md');
     });
 });
+
+describe('util.path.formatUrl(url) test', function() {
+    it('usage test', function(){
+        var r = 'css/base.css';
+        expect(util.path.formatUrl('js/../css/base.css')).to.equal(r);
+        expect(util.path.formatUrl('js/lib/../../css/base.css')).to.equal(r);
+        expect(util.path.formatUrl('js/lib/main/../../../css/base.css')).to.equal(r);
+        expect(util.path.formatUrl('./css/base.css')).to.equal(r);
+        expect(util.path.formatUrl('././css/base.css')).to.equal(r);
+        expect(util.path.formatUrl('./././css/base.css')).to.equal(r);
+        expect(util.path.formatUrl('../css/base.css')).to.equal('../css/base.css');
+    });
+
+    it('http: test', function(){
+        var r = 'http://web.yystatic.com/static/css/base.css';
+        expect(util.path.formatUrl('http://web.yystatic.com/static/js/../css/base.css')).to.equal(r);
+    });
+
+    it('https: test', function(){
+        var r = 'https://web.yystatic.com/static/css/base.css';
+        expect(util.path.formatUrl('https://web.yystatic.com/static/js/../css/base.css')).to.equal(r);
+    });
+    it('// test', function(){
+        var r = '//web.yystatic.com/static/css/base.css';
+        expect(util.path.formatUrl('//web.yystatic.com/static/js/../css/base.css')).to.equal(r);
+    });
+    it('/ test', function(){
+        var r = '/static/css/base.css';
+        expect(util.path.formatUrl('/static/js/../css/base.css')).to.equal(r);
+    });
+
+    it('file: test', function(){
+        var r = 'file:///C:/static/css/base.css';
+        expect(util.path.formatUrl('file:///C:/static/js/../css/base.css')).to.equal(r);
+    });
+
+    it('data: test', function(){
+        var r = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAYAAABXuSs3AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpFOEE4M0I5MzVGRTcxMUU3QkIyMUY0QjdDNjNEOTVGOCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpFOEE4M0I5NDVGRTcxMUU3QkIyMUY0QjdDNjNEOTVGOCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkU4QTgzQjkxNUZFNzExRTdCQjIxRjRCN0M2M0Q5NUY4IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkU4QTgzQjkyNUZFNzExRTdCQjIxRjRCN0M2M0Q5NUY4Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+KyjrvAAABYxJREFUeNrMWg1MVWUYfi4XAgkRFEMNScl+sDSyFv1jrCRzJpnmUvsTC5jZFpmLubZmtVyi2XSiRrMGQc1YzUqlzDSqmRUrRuL4UUEX5k+Qyo/5c3peznc5l3G559w/4N2ece+57/m+53vP971/B5tWD18lirhXYSIRT1xBXK5+byWOE41EJVFO7CFafJnU5iXxUGIWMZ94gLB7eP9FYidRSHxKnAs08UFENpFDXAn/yF/EKiKfaA8E8anEWuJqBEaEyWJiuxXlIAs6YcR6YlsASUONvU3NFearxWOJL4lb0bdSQTxE/O2NxROIH/qBtMgkNfdYT4nHEd8S49B/InPvUlwsEQ8nthJj0P8yRnEJt0J8DXEzBo4Il3fNDqcciK8wMGWa8jo9iIsLqgqwy/NFDhI3EB3yJdjph2xPSf9RDRw6CgxmVnLLjUxaIt3EeAb5ahrpMPWHRev6l4V4RDxBcXzH2eKhakWjrIzw+TfA0hVA7WHjmpCYxdi6/EWuPt643toG5BUwqhQx0zplXI8ewjD5JJBLKmGhlsk3qQV0QIgT8wjNDBdroeVkQOONvSJ8ELRNb+r6v22FljDavf6dk6Cd+NV8bicI1y6L7yDSzJabuxJYscH4PnwowIlxhHao+LO7bjpzxjImsO0dxrWRTHaTEvUnVddgXE9OAnYXW7Z8GfGgWDuKuGC20j0l0Gw2w1JzH4bWWmX8vrcU2sTrXVuV20IreAvahRpd91IdtLxcaHa7ofNKlmWLC9cosfgM2bZmy0x5HPh+n/55xv3AZ7Q8F9JNxLrPLQOKnEbjYlDKtGncVT3H3EArZ7+qoh4T5kYG+WFRlqyeLsS5AbDEbcLMVCfuLpqFtgmhHzrI+iVuRO/63+1lifMzSyEe9fnpvXsPGS95JvBLpf79fR74BbMtEV8l7jDRTGt/nT6JYz+6Iy1y3+06TFNTPrGZaQbxqhrL3iVRQv41ZlqnWrofMH/KqFineZqtJ2BCfISZVky08flok3+JS2ByyNAoy7fFCPFIM60J1zEbU+nYPj7W+kb/EX9kChOkycAdTKUWPWH5tgg5nJoVzbSnga/LjT284wOPQ7Y/5T+x42krmq8zlNvthteY/ixwtq3fiJ8V4sesaN52E6Pmy8Z3sX7qPODEP97N/HbBECROjev864WcFOK1VrWX0Mpv5BiBR9zY3Y/pGZ+nkl8cidZ2GzZ+Mtgb4nVC/IAndyxbBDCJ6to2NYeYrzBoVB7w0Jtc0v+eP2/zhnh1kOrleSQL5wBb1hlJUdNxPSWQaNlHUi5eRbznSS/6f51E07OAFnW8ZSHFa3QX52pPy7ZwZ+GQEA2Zc85g6cJ/zfqOw4NU13SnN8tOSSb5EiOadpwDZj/PrfRxT10z0o5ts7nUdM9L26TZUeUXevvMJPv7aQtw7VgjEmYyQ1y+1shvRMSSYlF3Ehys4ZlHz5hNWehcuoWp0m2ktwsQtzgtw0iYOpsicQDzdMTG9NSPnzy663Pj7iMel24Oi0udstKX0yLV0K6PgCn3GNfETZaV+/VQ5jmqfOeGUL6yutcSEQ588R7A6kjv5IzX01ZXYg8yDqQH7Yn1rjpZspLFvppE8pei1cC611hHluiLcSXZc08jPEz3IhblBYe1XXWyRAqIjAHWDNpMLHDXgnM0PX8kkgYI6d8JFo5oM2t6isJ0omEAkG5QXNqsdGs7Cx0i1dfD6odeYariAqvEHTfKI6roB9IVau5eDWf28uqYGmBTH5LeqOZ0WydYeesmLigTen+6PoCEZWzpz2c5uz1fiDtEmuoTiJdU6PWXNKkxZeztVm/y9ZX4U+oAefNKXF5MfYg+eiXuSqTrkqL25XiVBEmbJ8JR2EJ/XykHbb+KEfJPCM2+TPq/AAMAaYIpSV81Fh0AAAAASUVORK5CYII=';
+        expect(util.path.formatUrl(r)).to.equal(r);
+    });
+
+    it('about:blank test', function(){
+        var r = 'about:blank';
+        expect(util.path.formatUrl(r)).to.equal(r);
+    });
+
+    it('javascript test', function(){
+        var r = 'javascript:void(0);';
+        expect(util.path.formatUrl(r)).to.equal(r);
+    });
+
+});

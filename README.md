@@ -358,6 +358,13 @@ util.md2JSON: function(iPath);
 util.path.join()
 util.path.relative()
 util.path.resolve()
+
+/**
+ * 可以将 ./, ../ 这类型相对路径 format 掉的 方法
+ * @param  {String} iUrl 需要进行格式化的 url
+ * @return {String} r
+ */
+util.path.formatUrl(iUrl)
 ```
 
 

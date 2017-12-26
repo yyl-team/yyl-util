@@ -1,4 +1,7 @@
 # 版本信息
+## 1.9.4(2017-12-26)
+* [ADD] 新增 `util.path.formatUrl()` 方法
+
 ## 1.9.3(2017-12-22)
 * [ADD] 新增 `util.path.join()` 方法
 * [ADD] 新增 `util.path.relative()` 方法
