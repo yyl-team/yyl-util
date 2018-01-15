@@ -1,4 +1,7 @@
 # 版本信息
+## 1.10.0(2018-01-15)
+* [ADD] 新增 `util.runNodeModule()` 方法
+
 ## 1.9.4(2017-12-26)
 * [ADD] 新增 `util.path.formatUrl()` 方法
 

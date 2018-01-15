@@ -7,29 +7,28 @@ var
     FRAG_PATH = path.join(__dirname, 'frag'),
     FRAG_PATH2 = path.join(__dirname, 'frag2');
 
-var 
+var
     fn = {
         frag: {
-            build: function(){
-                if(!fs.existsSync(FRAG_PATH)){
+            build: function() {
+                if (!fs.existsSync(FRAG_PATH)) {
                     util.mkdirSync(FRAG_PATH);
                 }
                 util.removeFiles(FRAG_PATH);
 
-                if(!fs.existsSync(FRAG_PATH2)){
+                if (!fs.existsSync(FRAG_PATH2)) {
                     util.mkdirSync(FRAG_PATH2);
                 }
                 util.removeFiles(FRAG_PATH2);
             },
-            destory: function(){
-                if(fs.existsSync(FRAG_PATH)){
+            destory: function() {
+                if (fs.existsSync(FRAG_PATH)) {
                     util.removeFiles(FRAG_PATH, true);
                 }
 
-                if(fs.existsSync(FRAG_PATH2)){
+                if (fs.existsSync(FRAG_PATH2)) {
                     util.removeFiles(FRAG_PATH2, true);
                 }
-
             }
         }
 
@@ -37,7 +36,12 @@ var
 
 describe('util.readdirSync(iPath, filter)', function() {
     it('usage test', function() {
-        expect(util.readdirSync(path.join(__dirname, '../'), /node_modules/)).to.not.include('node_modules');
+        expect(
+            util.readdirSync(
+                path.join(__dirname, '../'),
+                /node_modules/
+            )
+        ).to.not.include('node_modules');
     });
 });
 
@@ -67,9 +71,7 @@ describe('util.envStringify(obj)', function() {
             num: 1,
             real: true
         })).to.equal('--name hello --num 1 --real true');
-
     });
-
 });
 
 describe('util.envParse(argv)', function() {
@@ -108,9 +110,8 @@ describe('util.buildTree(op)', function() {
             frontPath: 'yyl-util',
             path: path.join(__dirname, '..'),
             dirFilter: /\.svn|\.git|\.sass-cache|node_modules|gulpfile\.js|package\.json|webpack\.config\.js|config\.mine\.js/,
-            dirNoDeep: ['html', 'js', 'css', 'dist', 'images', 'sass', 'components'],
+            dirNoDeep: ['html', 'js', 'css', 'dist', 'images', 'sass', 'components']
         }));
-
     });
     it('util.buildTree({path, dirList}) test', function() {
         expect(util.buildTree({
@@ -184,7 +185,6 @@ describe('util.runCMD(str, callback, path, showOutput)', function() {
             expect(Boolean(err)).to.be.equal(false);
             done();
         }, __dirname));
-
     });
 
     it('showOutput false test', function(done) {
@@ -198,9 +198,7 @@ describe('util.runCMD(str, callback, path, showOutput)', function() {
         expect(util.runCMD('cd ..'));
         expect(util.runCMD('cd ..', null, __dirname, false));
         expect(util.runCMD('cd ..', null, null, false));
-
     });
-
 });
 
 describe('util.runSpawn(ctx, done, iPath, showOutput)', function() {
@@ -209,7 +207,6 @@ describe('util.runSpawn(ctx, done, iPath, showOutput)', function() {
             expect(Boolean(err)).to.be.equal(false);
             done();
         }, __dirname));
-
     });
 
     it('showOutput false test', function(done) {
@@ -223,9 +220,16 @@ describe('util.runSpawn(ctx, done, iPath, showOutput)', function() {
         expect(util.runSpawn('cd ..'));
         expect(util.runSpawn('cd ..', null, __dirname, false));
         expect(util.runSpawn('cd ..', null, null, false));
-
     });
+});
 
+describe('util.runNodeModule(ctx, done, op)', function() {
+    it('useage test', function(done) {
+        expect(util.runNodeModule('yyl', function(err) {
+            expect(Boolean(err)).to.be.equal(false);
+            done();
+        }, __dirname));
+    });
 });
 
 describe('util.removeFiles(list, callback, filters)', function() {
@@ -259,7 +263,6 @@ describe('util.removeFiles(list, callback, filters)', function() {
         expect(fs.existsSync(path.join(__dirname, '1'))).to.equal(true);
         expect(util.removeFiles(path.join(__dirname, '1'), true));
     });
-
 });
 
 describe('util.Promise()', function() {
@@ -270,7 +273,6 @@ describe('util.Promise()', function() {
                 result.push(1);
                 next();
             }, 50);
-
         }).then(function(next) {
             setTimeout(function() {
                 result.push(2);
@@ -284,11 +286,8 @@ describe('util.Promise()', function() {
         }).then(function() {
             expect(result).to.deep.equal([1, 2, 3]);
             done();
-
         }).start();
     });
-
-
 });
 
 describe('util.readFilesSync(iPath, filter)', function() {
@@ -299,7 +298,12 @@ describe('util.readFilesSync(iPath, filter)', function() {
         fn.frag.destory();
     });
     it('filter regex test', function() {
-        expect(util.readFilesSync(path.join(__dirname, '../node_modules'), /^(?!.*?node_modules).*$/).length).to.equal(0);
+        expect(
+            util.readFilesSync(
+                path.join(__dirname, '../node_modules'),
+                /^(?!.*?node_modules).*$/
+            ).length
+        ).to.equal(0);
     });
 
     it('filter function test', function() {
@@ -323,9 +327,15 @@ describe('util.copyFiles(list, callback, filters, render, basePath)', function()
         fs.writeFileSync(path.join(FRAG_PATH, '01.txt'), '123');
 
         var obj = {};
-        obj[path.join(FRAG_PATH, '01.txt')] = [path.join(FRAG_PATH2, '01.txt'), path.join(FRAG_PATH2, '02.txt')];
+        obj[
+            path.join(FRAG_PATH, '01.txt')] = [path.join(FRAG_PATH2, '01.txt'),
+            path.join(FRAG_PATH2, '02.txt')
+        ];
         util.copyFiles(obj, function() {
-            expect(fs.existsSync(path.join(FRAG_PATH2, '01.txt')) && fs.existsSync(path.join(FRAG_PATH2, '02.txt'))).to.equal(true);
+            expect(
+                fs.existsSync(path.join(FRAG_PATH2, '01.txt')) &&
+                fs.existsSync(path.join(FRAG_PATH2, '02.txt'))
+            ).to.equal(true);
 
             fn.frag.destory();
             done();
@@ -358,7 +368,10 @@ describe('util.copyFiles(list, callback, filters, render, basePath)', function()
             FRAG_PATH,
             FRAG_PATH2,
             function() {
-                expect(fs.existsSync(path.join(FRAG_PATH2, '01.txt')) && !fs.existsSync(path.join(FRAG_PATH2, '02.txt'))).to.equal(true);
+                expect(
+                    fs.existsSync(path.join(FRAG_PATH2, '01.txt')) &&
+                    !fs.existsSync(path.join(FRAG_PATH2, '02.txt'))
+                ).to.equal(true);
                 fn.frag.destory();
                 done();
             },
@@ -376,12 +389,15 @@ describe('util.copyFiles(list, callback, filters, render, basePath)', function()
             FRAG_PATH,
             FRAG_PATH2,
             function() {
-                expect(fs.existsSync(path.join(FRAG_PATH2, '03.txt')) && !fs.existsSync(path.join(FRAG_PATH2, '04.txt'))).to.equal(true);
+                expect(
+                    fs.existsSync(path.join(FRAG_PATH2, '03.txt')) &&
+                    !fs.existsSync(path.join(FRAG_PATH2, '04.txt'))
+                ).to.equal(true);
                 fn.frag.destory();
                 done();
             },
             function(iPath) {
-                if(/04\.txt$/.test(iPath)){
+                if (/04\.txt$/.test(iPath)) {
                     return false;
                 } else {
                     return true;
@@ -399,7 +415,9 @@ describe('util.copyFiles(list, callback, filters, render, basePath)', function()
             FRAG_PATH,
             FRAG_PATH2,
             function() {
-                expect(fs.readFileSync(path.join(FRAG_PATH2, '01.txt')).toString()).to.equal('101.txt');
+                expect(
+                    fs.readFileSync(path.join(FRAG_PATH2, '01.txt')).toString()
+                ).to.equal('101.txt');
                 expect(fs.readFileSync(path.join(FRAG_PATH, '01.txt')).toString()).to.equal('1');
                 fn.frag.destory();
                 done();
@@ -409,7 +427,6 @@ describe('util.copyFiles(list, callback, filters, render, basePath)', function()
                 return content.toString() + path.parse(filePath).base;
             }
         );
-
     });
 
     it('util.copyFiles(fromFile, toFile, callback, filters, null, basePath) test', function(done) {
@@ -448,7 +465,6 @@ describe('util.timer', function() {
                 done();
             }
         }, 10);
-
     });
 });
 
@@ -459,7 +475,7 @@ describe('util.help', function() {
             commands: {
                 'key01': 'content01',
                 'key02': 'content02',
-                'key03': 'content03',
+                'key03': 'content03'
             },
             options: {
                 '--help': 'content for help'
@@ -503,8 +519,6 @@ describe('util.msg', function() {
         expect(util.msg.test04('test 04'));
         expect(util.msg.test05('test 05'));
         expect(util.msg.test06('test 06'));
-        
-
     });
 
     it('util.msg.del(msg) test', function() {
@@ -552,41 +566,39 @@ describe('util.msg', function() {
         }));
     });
 
-    it('other test', function(){
+    it('other test', function() {
         expect(util.msg.replace('aaa'));
         expect(util.msg.replace('bbb'));
         expect(util.msg.line());
         expect(util.msg.newline());
         expect(util.msg.nowrap('testtesttesttesttesttesttesttesttesttesttest'));
-
     });
 
-    it('util.msg.line() test', function(){
+    it('util.msg.line() test', function() {
         expect(util.msg.line());
     });
 
-    it('util.msg.line().success() test', function(){
+    it('util.msg.line().success() test', function() {
         expect(util.msg.line().success('123'));
     });
 
-    it('util.msg.newline() test', function(){
+    it('util.msg.newline() test', function() {
         expect(util.msg.newline());
     });
 
-    it('util.msg.newline().success() test', function(){
+    it('util.msg.newline().success() test', function() {
         expect(util.msg.newline().success('123'));
     });
 
-    it('util.msg.nowrap(txt, isNewLine) test', function(){
+    it('util.msg.nowrap(txt, isNewLine) test', function() {
         expect(util.msg.nowrap('123', true));
     });
 
-    it('util.msg.nowrap(txt, isNewLine).success() test', function(){
+    it('util.msg.nowrap(txt, isNewLine).success() test', function() {
         expect(util.msg.nowrap('123', true).success('123'));
     });
-    
 
-    it('util.msg.silent(bool) test', function(){
+    it('util.msg.silent(bool) test', function() {
         expect(util.msg.silent(true));
         expect(util.msg.silent(false));
     });
@@ -627,7 +639,6 @@ describe('util.type()', function() {
     it('type null test', function() {
         expect(util.type(null)).to.equal('null');
     });
-
 });
 
 
@@ -655,7 +666,6 @@ describe('util.extend()', function() {
             a: 2,
             b: 2
         });
-
     });
 
     it('deep test', function() {
@@ -701,7 +711,6 @@ describe('util.extend()', function() {
                 b3: 4
             }
         });
-
     });
 
     it('extend test', function() {
@@ -746,9 +755,7 @@ describe('util.extend()', function() {
                 b3: 4
             }
         });
-
     });
-
 });
 
 describe('util.get(url)', function() {
@@ -756,102 +763,96 @@ describe('util.get(url)', function() {
 });
 
 describe('util.pop(content)', function() {
-    it('useage test', function(){
+    it('useage test', function() {
         expect(util.pop('test'));
     });
-    it('queue test', function(done){
+    it('queue test', function(done) {
         var padding = 5;
-        var key = setInterval(function(){
+        var key = setInterval(function() {
             expect(util.pop('test ' + padding));
             padding--;
-            if(!padding){
+            if (!padding) {
                 clearInterval(key);
                 done();
             }
-
         }, 100);
-
     });
 });
 
 describe('util.compareVersion(v1, v2)', function() {
-    it('normal compare', function(){
+    it('normal compare', function() {
         expect(util.compareVersion('2.0.1', '2.0.0')).to.equal(1);
         expect(util.compareVersion('2.1.0', '2.0.0')).to.equal(1);
         expect(util.compareVersion('2.1.0', '2.0.1')).to.equal(1);
         expect(util.compareVersion('1.1.0', '2.0.0')).to.equal(-1);
     });
-    it('^1.0.0, ~1.0.0, v1.0.0 version compare', function(){
+    it('^1.0.0, ~1.0.0, v1.0.0 version compare', function() {
         expect(util.compareVersion('^2.0.1', '2.0.0')).to.equal(1);
         expect(util.compareVersion('~2.1.0', '2.0.0')).to.equal(1);
         expect(util.compareVersion('v2.1.0', '2.0.1')).to.equal(1);
         expect(util.compareVersion('^1.1.0', '~2.0.0')).to.equal(-1);
-
     });
 });
 
 describe('util.taskQueue', function() {
-    it('util.taskQueue.add(fn) test', function(done){
+    it('util.taskQueue.add(fn) test', function(done) {
         util.taskQueue.clear();
         var padding = 5;
         var r = [];
 
-        var key = setInterval(function(){
-            (function(padding){
-                util.taskQueue.add(function(next){
-                    var 
-                        finish = function(){
+        var key = setInterval(function() {
+            (function(padding) {
+                util.taskQueue.add(function(next) {
+                    var
+                        finish = function() {
                             r.push(padding);
                             next();
-                            if(!padding){
-                                expect(r).to.deep.equal([4,3,2,1,0]);
+                            if (!padding) {
+                                expect(r).to.deep.equal([4, 3, 2, 1, 0]);
                                 done();
                             }
                         };
-                    if(padding % 2){
+                    if (padding % 2) {
                         finish();
                     } else {
-                        setTimeout(function(){
+                        setTimeout(function() {
                             finish();
                         }, 20);
                     }
-
                 });
-
             })(--padding);
 
-            if(!padding){
+            if (!padding) {
                 clearInterval(key);
             }
         }, 100);
     });
 
-    it('util.taskQueue.add(fn, delay) test', function(done){
+    it('util.taskQueue.add(fn, delay) test', function(done) {
         util.taskQueue.clear();
         var padding = 5;
         var r = [];
 
-        var key = setInterval(function(){
-            (function(padding){
-                util.taskQueue.add(function(next){
+        var key = setInterval(function() {
+            (function(padding) {
+                util.taskQueue.add(function(next) {
                     r.push(padding);
-                    if(!padding){
+                    if (!padding) {
                         expect(r).to.deep.equal([0]);
                         done();
                     }
 
                     next();
-
                 }, 500);
             })(--padding);
 
-            if(!padding){
+            if (!padding) {
                 clearInterval(key);
             }
         }, 50);
     });
 
-    it('util.taskQueue.add(type, fn, delay) test', function(done){
+    it('util.taskQueue.add(type, fn, delay) test', function(done) {
         util.taskQueue.clear();
         var p = 5;
         var r = [];
@@ -859,93 +860,87 @@ describe('util.taskQueue', function() {
         var rFinish = false;
         var r2Finish = false;
 
-        var 
-            check = function(){
-                if(rFinish && r2Finish){
+        var
+            check = function() {
+                if (rFinish && r2Finish) {
                     done();
                 }
             };
 
-        var key = setInterval(function(){
-            (function(p){
-                util.taskQueue.add('r', function(next){
-                    var 
-                        finish = function(){
+        var key = setInterval(function() {
+            (function(p) {
+                util.taskQueue.add('r', function(next) {
+                    var
+                        finish = function() {
                             r.push(p);
                             next();
-                            if(!p){
-                                expect(r).to.deep.equal([4,3,2,1,0]);
+                            if (!p) {
+                                expect(r).to.deep.equal([4, 3, 2, 1, 0]);
                                 rFinish = true;
                                 check();
                             }
                         };
-                    if(p % 2){
+                    if (p % 2) {
                         finish();
                     } else {
-                        setTimeout(function(){
+                        setTimeout(function() {
                             finish();
                         }, 20);
                     }
-
                 });
-
-                util.taskQueue.add('r2', function(next){
-                    var 
-                        finish = function(){
+                util.taskQueue.add('r2', function(next) {
+                    var
+                        finish = function() {
                             r2.push(p);
                             next();
-                            if(!p){
+                            if (!p) {
                                 expect(r2).to.deep.equal([0]);
                                 r2Finish = true;
                                 check();
                             }
                         };
-                    if(p % 2){
+                    if (p % 2) {
                         finish();
                     } else {
-                        setTimeout(function(){
+                        setTimeout(function() {
                             finish();
                         }, 20);
                     }
-
                 }, 500);
-
             })(--p);
 
-            if(!p){
+            if (!p) {
                 clearInterval(key);
             }
         }, 100);
     });
-
 });
 
 describe('util.debounce(func, wait, immediate)', function() {
-    it('useage test', function(done){
+    it('useage test', function(done) {
         var padding = 5;
         var r = 0;
-        var key = setInterval(function(){
+        var key = setInterval(function() {
             padding--;
-            util.debounce(function(){
+            util.debounce(function() {
                 r++;
-                if(!padding){
+                if (!padding) {
                     padding--;
                     expect(r).to.equal(2);
                     done();
                 }
             }, 40)();
 
-            if(!padding){
+            if (!padding) {
                 clearInterval(key);
             }
-
         }, 10);
-
     });
 });
 
 describe('util.md2JSON(iPath)', function() {
-    var cases = [{ // 标准文件
+    var
+        cases = [{ // 标准文件
             testName: 'standard test',
             content: [
                 '# title h1',
@@ -965,7 +960,7 @@ describe('util.md2JSON(iPath)', function() {
                 '3. num-list03'
             ].join('\r\n'),
             result: {
-                type: "root",
+                type: 'root',
                 children: [{
                     type: 'h1',
                     ctx: 'title h1',
@@ -994,7 +989,7 @@ describe('util.md2JSON(iPath)', function() {
                                             ctx: [
                                                 'normal text01',
                                                 'normal text02',
-                                                'normal text03',
+                                                'normal text03'
                                             ]
                                         }, {
                                             type: 'list',
@@ -1171,14 +1166,13 @@ describe('util.md2JSON(iPath)', function() {
 
         }];
 
-    
 
-    cases.forEach(function(item){
-        if(!item.testName){
+    cases.forEach(function(item) {
+        if (!item.testName) {
             return;
         }
 
-        it(item.testName, function(done){
+        it(item.testName, function(done) {
             fn.frag.build();
             // 创建 md
             var mdPath = path.join(FRAG_PATH, '1.md');
@@ -1189,11 +1183,8 @@ describe('util.md2JSON(iPath)', function() {
 
             fn.frag.destory();
             done();
-
         });
-        
     });
-    
 });
 
 describe('util.path.join() test', function() {
@@ -1209,21 +1200,21 @@ describe('util.path.join() test', function() {
 });
 
 describe('util.path.relative() test', function() {
-    it('file path test', function(){
+    it('file path test', function() {
         expect(util.path.relative('./../test/', './../test2/1.md')).to.equal('../test2/1.md');
         expect(util.path.relative('.\\..\\test\\', '.\\..\\test2\\1.md')).to.equal('../test2/1.md');
     });
 });
 
 describe('util.path.resolve() test', function() {
-    it('file path test', function(){
+    it('file path test', function() {
         expect(util.path.relative('./../test/', './../test2/1.md')).to.equal('../test2/1.md');
         expect(util.path.relative('.\\..\\test\\', '.\\..\\test2\\1.md')).to.equal('../test2/1.md');
     });
 });
 
 describe('util.path.formatUrl(url) test', function() {
-    it('usage test', function(){
+    it('usage test', function() {
         var r = 'css/base.css';
         expect(util.path.formatUrl('js/../css/base.css')).to.equal(r);
         expect(util.path.formatUrl('js/lib/../../css/base.css')).to.equal(r);
@@ -1234,42 +1225,45 @@ describe('util.path.formatUrl(url) test', function() {
         expect(util.path.formatUrl('../css/base.css')).to.equal('../css/base.css');
     });
 
-    it('http: test', function(){
+    it('http: test', function() {
         var r = 'http://web.yystatic.com/static/css/base.css';
-        expect(util.path.formatUrl('http://web.yystatic.com/static/js/../css/base.css')).to.equal(r);
+        expect(
+            util.path.formatUrl('http://web.yystatic.com/static/js/../css/base.css')
+        ).to.equal(r);
     });
 
-    it('https: test', function(){
+    it('https: test', function() {
         var r = 'https://web.yystatic.com/static/css/base.css';
-        expect(util.path.formatUrl('https://web.yystatic.com/static/js/../css/base.css')).to.equal(r);
+        expect(
+            util.path.formatUrl('https://web.yystatic.com/static/js/../css/base.css')
+        ).to.equal(r);
     });
-    it('// test', function(){
+    it('// test', function() {
         var r = '//web.yystatic.com/static/css/base.css';
         expect(util.path.formatUrl('//web.yystatic.com/static/js/../css/base.css')).to.equal(r);
     });
-    it('/ test', function(){
+    it('/ test', function() {
         var r = '/static/css/base.css';
         expect(util.path.formatUrl('/static/js/../css/base.css')).to.equal(r);
     });
 
-    it('file: test', function(){
+    it('file: test', function() {
         var r = 'file:///C:/static/css/base.css';
         expect(util.path.formatUrl('file:///C:/static/js/../css/base.css')).to.equal(r);
     });
 
-    it('data: test', function(){
+    it('data: test', function() {
         var r = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAYAAABXuSs3AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpFOEE4M0I5MzVGRTcxMUU3QkIyMUY0QjdDNjNEOTVGOCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpFOEE4M0I5NDVGRTcxMUU3QkIyMUY0QjdDNjNEOTVGOCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkU4QTgzQjkxNUZFNzExRTdCQjIxRjRCN0M2M0Q5NUY4IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkU4QTgzQjkyNUZFNzExRTdCQjIxRjRCN0M2M0Q5NUY4Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+KyjrvAAABYxJREFUeNrMWg1MVWUYfi4XAgkRFEMNScl+sDSyFv1jrCRzJpnmUvsTC5jZFpmLubZmtVyi2XSiRrMGQc1YzUqlzDSqmRUrRuL4UUEX5k+Qyo/5c3peznc5l3G559w/4N2ece+57/m+53vP971/B5tWD18lirhXYSIRT1xBXK5+byWOE41EJVFO7CFafJnU5iXxUGIWMZ94gLB7eP9FYidRSHxKnAs08UFENpFDXAn/yF/EKiKfaA8E8anEWuJqBEaEyWJiuxXlIAs6YcR6YlsASUONvU3NFearxWOJL4lb0bdSQTxE/O2NxROIH/qBtMgkNfdYT4nHEd8S49B/InPvUlwsEQ8nthJj0P8yRnEJt0J8DXEzBo4Il3fNDqcciK8wMGWa8jo9iIsLqgqwy/NFDhI3EB3yJdjph2xPSf9RDRw6CgxmVnLLjUxaIt3EeAb5ahrpMPWHRev6l4V4RDxBcXzH2eKhakWjrIzw+TfA0hVA7WHjmpCYxdi6/EWuPt643toG5BUwqhQx0zplXI8ewjD5JJBLKmGhlsk3qQV0QIgT8wjNDBdroeVkQOONvSJ8ELRNb+r6v22FljDavf6dk6Cd+NV8bicI1y6L7yDSzJabuxJYscH4PnwowIlxhHao+LO7bjpzxjImsO0dxrWRTHaTEvUnVddgXE9OAnYXW7Z8GfGgWDuKuGC20j0l0Gw2w1JzH4bWWmX8vrcU2sTrXVuV20IreAvahRpd91IdtLxcaHa7ofNKlmWLC9cosfgM2bZmy0x5HPh+n/55xv3AZ7Q8F9JNxLrPLQOKnEbjYlDKtGncVT3H3EArZ7+qoh4T5kYG+WFRlqyeLsS5AbDEbcLMVCfuLpqFtgmhHzrI+iVuRO/63+1lifMzSyEe9fnpvXsPGS95JvBLpf79fR74BbMtEV8l7jDRTGt/nT6JYz+6Iy1y3+06TFNTPrGZaQbxqhrL3iVRQv41ZlqnWrofMH/KqFineZqtJ2BCfISZVky08flok3+JS2ByyNAoy7fFCPFIM60J1zEbU+nYPj7W+kb/EX9kChOkycAdTKUWPWH5tgg5nJoVzbSnga/LjT284wOPQ7Y/5T+x42krmq8zlNvthteY/ixwtq3fiJ8V4sesaN52E6Pmy8Z3sX7qPODEP97N/HbBECROjev864WcFOK1VrWX0Mpv5BiBR9zY3Y/pGZ+nkl8cidZ2GzZ+Mtgb4nVC/IAndyxbBDCJ6to2NYeYrzBoVB7w0Jtc0v+eP2/zhnh1kOrleSQL5wBb1hlJUdNxPSWQaNlHUi5eRbznSS/6f51E07OAFnW8ZSHFa3QX52pPy7ZwZ+GQEA2Zc85g6cJ/zfqOw4NU13SnN8tOSSb5EiOadpwDZj/PrfRxT10z0o5ts7nUdM9L26TZUeUXevvMJPv7aQtw7VgjEmYyQ1y+1shvRMSSYlF3Ehys4ZlHz5hNWehcuoWp0m2ktwsQtzgtw0iYOpsicQDzdMTG9NSPnzy663Pj7iMel24Oi0udstKX0yLV0K6PgCn3GNfETZaV+/VQ5jmqfOeGUL6yutcSEQ588R7A6kjv5IzX01ZXYg8yDqQH7Yn1rjpZspLFvppE8pei1cC611hHluiLcSXZc08jPEz3IhblBYe1XXWyRAqIjAHWDNpMLHDXgnM0PX8kkgYI6d8JFo5oM2t6isJ0omEAkG5QXNqsdGs7Cx0i1dfD6odeYariAqvEHTfKI6roB9IVau5eDWf28uqYGmBTH5LeqOZ0WydYeesmLigTen+6PoCEZWzpz2c5uz1fiDtEmuoTiJdU6PWXNKkxZeztVm/y9ZX4U+oAefNKXF5MfYg+eiXuSqTrkqL25XiVBEmbJ8JR2EJ/XykHbb+KEfJPCM2+TPq/AAMAaYIpSV81Fh0AAAAASUVORK5CYII=';
         expect(util.path.formatUrl(r)).to.equal(r);
     });
 
-    it('about:blank test', function(){
+    it('about:blank test', function() {
         var r = 'about:blank';
         expect(util.path.formatUrl(r)).to.equal(r);
     });
 
-    it('javascript test', function(){
+    it('javascript test', function() {
         var r = 'javascript:void(0);';
         expect(util.path.formatUrl(r)).to.equal(r);
     });
-
 });
