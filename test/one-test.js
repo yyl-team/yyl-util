@@ -51,7 +51,10 @@ util.infoBar.init({
 var name = 'jack';
 util.infoBar.js({barLeft: '123', barRight: '456', foot: '10s'});
 console.log(`hello ${name}`);
-// console.log('Terminal size: ' + process.stdout.columns + 'x' + process.stdout.rows);
+console.log('Terminal size: ' + process.stdout.columns + 'x' + process.stdout.rows);
+util.runNodeModule('yyl', {
+  cwd: __dirname
+});
 
 
 // console.log(chalk.black.bgYellow(' JS   ') + chalk.black.bgWhite(' 10s '), chalk.magenta('A'), '20', chalk.blue('M'), 10, chalk.red('D'), 0);
