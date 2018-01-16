@@ -1,4 +1,7 @@
 # 版本信息
+## 1.10.1(2018-01-16)
+* [ADD] 新增 `util.cleanScreen()` 方法
+
 ## 1.10.0(2018-01-15)
 * [ADD] 新增 `util.runNodeModule()` 方法
 

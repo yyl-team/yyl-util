@@ -484,6 +484,11 @@ util.path.resolve()
 util.path.formatUrl(iUrl)
 ```
 
+### util.cleanScreen()
+```
+// 清空当前控制台
+util.cleanScreen();
+```
 
 ## 历史记录
 在 [这里](./history.md)
