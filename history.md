@@ -1,4 +1,7 @@
 # 版本信息
+## 1.10.4(2018-01-22)
+* [ADD] 新增 `util.checkPortUseage(port, done)` 方法
+
 ## 1.10.3(2018-01-22)
 * [ADD] 新增 `util.openCMD(ctx)` 方法
 
