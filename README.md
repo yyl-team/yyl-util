@@ -490,6 +490,12 @@ util.path.formatUrl(iUrl)
 util.cleanScreen();
 ```
 
+### util.openCMD(ctx)
+```
+// 新窗口打开命令
+util.openCMD(ctx);
+```
+
 ## 历史记录
 在 [这里](./history.md)
 
