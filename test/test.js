@@ -145,6 +145,25 @@ describe('util.requireJs(iPath)', function() {
     it('useage test', function() {
         expect(util.requireJs('../lib/yyl-util.js'));
     });
+    it('cache test', function(done) {
+        fn.frag.destory();
+        fn.frag.build();
+        const FRAG_JS_PATH = path.join(FRAG_PATH, '01.js');
+        const RELATIVE_PATH = util.joinFormat('./', path.relative(__dirname, FRAG_JS_PATH));
+        const param = {
+            i: 1
+        };
+        fs.writeFileSync(FRAG_JS_PATH, `module.exports=${JSON.stringify(param)}`);
+
+        expect(require(RELATIVE_PATH)).to.deep.equal(param);
+
+        param.i = 2;
+        fs.writeFileSync(FRAG_JS_PATH, `module.exports=${JSON.stringify(param)}`);
+        delete require.cache[RELATIVE_PATH];
+        expect(require(RELATIVE_PATH)).to.deep.equal(param);
+        fn.frag.destory();
+        done();
+    });
 });
 
 describe('util.mkdirSync(toFile)', function() {
@@ -174,8 +193,8 @@ describe('util.joinFormat()', function() {
         expect(util.joinFormat('//www.yy.com/991')).to.equal('//www.yy.com/991');
     });
     it('file path test', function() {
-        expect(util.joinFormat('./../test/test.js')).to.equal('./../test/test.js');
-        expect(util.joinFormat('.\\..\\test\\test.js')).to.equal('./../test/test.js');
+        expect(util.joinFormat('./../test/test.js')).to.equal('../test/test.js');
+        expect(util.joinFormat('.\\..\\test\\test2.js')).to.equal('../test/test2.js');
     });
 });
 
@@ -1194,8 +1213,8 @@ describe('util.path.join() test', function() {
         expect(util.path.join('//www.yy.com/991')).to.equal('//www.yy.com/991');
     });
     it('file path test', function() {
-        expect(util.path.join('./../test/test.js')).to.equal('./../test/test.js');
-        expect(util.path.join('.\\..\\test\\test.js')).to.equal('./../test/test.js');
+        expect(util.path.join('./../test/test.js')).to.equal('../test/test.js');
+        expect(util.path.join('.\\..\\test\\test.js')).to.equal('../test/test.js');
     });
 });
 
