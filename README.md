@@ -490,6 +490,26 @@ util.path.formatUrl(iUrl)
 util.cleanScreen();
 ```
 
+### util.openCMD(ctx)
+```
+/**
+ * 新窗口打开命令
+ * @param {String} ctx 命令语句
+ */
+util.openCMD(ctx);
+```
+
+### util.checkPortUseage(port, done)
+```
+/**
+ * 检查端口是否可用
+ * @param {Number}   port         需要检查的端口
+ * @param {Function} done(canUse) 回调函数
+ * @param {Boolean}  canUse       是否可用
+ */
+util.openCMD(ctx);
+```
+
 ## 历史记录
 在 [这里](./history.md)
 

@@ -4,6 +4,7 @@ var
     expect = require('chai').expect,
     path = require('path'),
     fs = require('fs'),
+    net = require('net'),
     FRAG_PATH = path.join(__dirname, 'frag'),
     FRAG_PATH2 = path.join(__dirname, 'frag2');
 
@@ -1284,5 +1285,20 @@ describe('util.path.formatUrl(url) test', function() {
     it('javascript test', function() {
         var r = 'javascript:void(0);';
         expect(util.path.formatUrl(r)).to.equal(r);
+    });
+});
+
+describe('util.checkPortUseage(port) test', function() {
+    it('useage test', function() {
+        var server = net.createServer().listen(1234);
+        server.on('listening', function() {
+            util.checkPortUseage(1234, function(canUse) {
+                expect(canUse).to.equal(false);
+                server.close();
+            });
+            util.checkPortUseage(4321, function(canUse) {
+                expect(canUse).to.equal(true);
+            });
+        });
     });
 });

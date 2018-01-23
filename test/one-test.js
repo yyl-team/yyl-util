@@ -56,6 +56,8 @@ util.runNodeModule('yyl', {
   cwd: __dirname
 });
 
+util.openCMD('selenium-standalone start');
+
 
 // console.log(chalk.black.bgYellow(' JS   ') + chalk.black.bgWhite(' 10s '), chalk.magenta('A'), '20', chalk.blue('M'), 10, chalk.red('D'), 0);
 // console.log(chalk.white.bgMagenta(' IMG  ') + chalk.black.bgWhite(' 10s '), chalk.magenta('A'), ':', '20', chalk.blue('M'), ':', 10, chalk.red('D'), ':', 0);
