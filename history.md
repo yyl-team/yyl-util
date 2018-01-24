@@ -1,7 +1,8 @@
 # 版本信息
 ## 1.10.5(2018-01-22)
-* [EDIT] `util.requireJs(iPath)` 方法增加去掉缓存功能
 * [ADD] 新增 `util.infoBar` 系列状态条方法
+* [ADD] 新增 `util.getTime()` 方法
+* [EDIT] `util.requireJs(iPath)` 方法增加去掉缓存功能
 * [TODO] `util.openCMD()` 在mac 上 有问题
 
 ## 1.10.4(2018-01-22)
