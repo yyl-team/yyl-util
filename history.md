@@ -1,4 +1,7 @@
 # 版本信息
+## 1.10.5(2018-01-22)
+* [EDIT] `util.requireJs(iPath)` 方法增加去掉缓存功能
+
 ## 1.10.4(2018-01-22)
 * [ADD] 新增 `util.checkPortUseage(port, done)` 方法
 

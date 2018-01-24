@@ -507,7 +507,7 @@ util.openCMD(ctx);
  * @param {Function} done(canUse) 回调函数
  * @param {Boolean}  canUse       是否可用
  */
-util.openCMD(ctx);
+util.checkPortUseage(port, done);
 ```
 
 ## 历史记录
