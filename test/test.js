@@ -1,13 +1,13 @@
 'use strict';
-var util = require('../index.js');
-var expect = require('chai').expect;
-var path = require('path');
-var fs = require('fs');
-var net = require('net');
-var FRAG_PATH = path.join(__dirname, 'frag');
-var FRAG_PATH2 = path.join(__dirname, 'frag2');
+const util = require('../index.js');
+const expect = require('chai').expect;
+const path = require('path');
+const fs = require('fs');
+const net = require('net');
+const FRAG_PATH = path.join(__dirname, 'frag');
+const FRAG_PATH2 = path.join(__dirname, 'frag2');
 
-var
+const
   fn = {
     frag: {
       build: function() {
@@ -285,7 +285,7 @@ describe('util.removeFiles(list, callback, filters)', () => {
 
 describe('util.Promise()', () => {
   it('queue test', (done) => {
-    var result = [];
+    const result = [];
     new util.Promise(((next) => {
       setTimeout(() => {
         result.push(1);
@@ -344,7 +344,7 @@ describe('util.copyFiles(list, callback, filters, render, basePath)', () => {
 
     fs.writeFileSync(path.join(FRAG_PATH, '01.txt'), '123');
 
-    var obj = {};
+    const obj = {};
     obj[
       path.join(FRAG_PATH, '01.txt')] = [path.join(FRAG_PATH2, '01.txt'),
       path.join(FRAG_PATH2, '02.txt')
@@ -472,8 +472,8 @@ describe('util.copyFiles(list, callback, filters, render, basePath)', () => {
 describe('util.timer', () => {
   it('useage test', (done) => {
     expect(util.timer.start());
-    var padding = 5;
-    var iKey = setInterval(() => {
+    let padding = 5;
+    const iKey = setInterval(() => {
       expect(util.timer.mark());
       padding--;
       if (!padding) {
@@ -662,14 +662,14 @@ describe('util.type()', () => {
 
 describe('util.extend()', () => {
   it('sample test', () => {
-    var obj01 = {
+    const obj01 = {
       a: 1
     };
-    var obj02 = {
+    const obj02 = {
       a: 2,
       b: 2
     };
-    var r = util.extend(obj01, obj02);
+    const r = util.extend(obj01, obj02);
 
     expect(obj01).to.deep.equal({
       a: 2,
@@ -686,14 +686,14 @@ describe('util.extend()', () => {
   });
 
   it('deep test', () => {
-    var obj01 = {
+    const obj01 = {
       a: 1,
       b: {
         b1: 1,
         b2: 2
       }
     };
-    var obj02 = {
+    const obj02 = {
       a: 2,
       b: {
         b1: 2,
@@ -701,7 +701,7 @@ describe('util.extend()', () => {
         b3: 4
       }
     };
-    var r = util.extend(true, obj01, obj02);
+    const r = util.extend(true, obj01, obj02);
 
     expect(obj01).to.deep.equal({
       a: 2,
@@ -730,14 +730,14 @@ describe('util.extend()', () => {
   });
 
   it('extend test', () => {
-    var obj01 = {
+    const obj01 = {
       a: 1,
       b: {
         b1: 1,
         b2: 2
       }
     };
-    var obj02 = {
+    const obj02 = {
       a: 2,
       b: {
         b1: 2,
@@ -745,7 +745,7 @@ describe('util.extend()', () => {
         b3: 4
       }
     };
-    var r = util.extend({}, obj01, obj02);
+    const r = util.extend({}, obj01, obj02);
 
     expect(obj01).to.deep.equal({
       a: 1,
@@ -782,8 +782,8 @@ describe('util.pop(content)', () => {
     expect(util.pop('test'));
   });
   it('queue test', (done) => {
-    var padding = 5;
-    var key = setInterval(() => {
+    let padding = 5;
+    const key = setInterval(() => {
       expect(util.pop(`test ${  padding}`));
       padding--;
       if (!padding) {
@@ -812,13 +812,13 @@ describe('util.compareVersion(v1, v2)', () => {
 describe('util.taskQueue', () => {
   it('util.taskQueue.add(fn) test', (done) => {
     util.taskQueue.clear();
-    var padding = 5;
-    var r = [];
+    let padding = 5;
+    const r = [];
 
-    var key = setInterval(() => {
+    const key = setInterval(() => {
       (function(padding) {
         util.taskQueue.add((next) => {
-          var
+          const
             finish = function() {
               r.push(padding);
               next();
@@ -845,10 +845,10 @@ describe('util.taskQueue', () => {
 
   it('util.taskQueue.add(fn, delay) test', (done) => {
     util.taskQueue.clear();
-    var padding = 5;
-    var r = [];
+    let padding = 5;
+    const r = [];
 
-    var key = setInterval(() => {
+    const key = setInterval(() => {
       (function(padding) {
         util.taskQueue.add((next) => {
           r.push(padding);
@@ -869,23 +869,23 @@ describe('util.taskQueue', () => {
 
   it('util.taskQueue.add(type, fn, delay) test', (done) => {
     util.taskQueue.clear();
-    var p = 5;
-    var r = [];
-    var r2 = [];
-    var rFinish = false;
-    var r2Finish = false;
+    let p = 5;
+    const r = [];
+    const r2 = [];
+    let rFinish = false;
+    let r2Finish = false;
 
-    var
+    const
       check = function() {
         if (rFinish && r2Finish) {
           done();
         }
       };
 
-    var key = setInterval(() => {
+    const key = setInterval(() => {
       (function(p) {
         util.taskQueue.add('r', (next) => {
-          var
+          const
             finish = function() {
               r.push(p);
               next();
@@ -904,7 +904,7 @@ describe('util.taskQueue', () => {
           }
         });
         util.taskQueue.add('r2', (next) => {
-          var
+          const
             finish = function() {
               r2.push(p);
               next();
@@ -933,9 +933,9 @@ describe('util.taskQueue', () => {
 
 describe('util.debounce(func, wait, immediate)', () => {
   it('useage test', (done) => {
-    var padding = 5;
-    var r = 0;
-    var key = setInterval(() => {
+    let padding = 5;
+    let r = 0;
+    const key = setInterval(() => {
       padding--;
       util.debounce(() => {
         r++;
@@ -954,7 +954,7 @@ describe('util.debounce(func, wait, immediate)', () => {
 });
 
 describe('util.md2JSON(iPath)', () => {
-  var
+  const
     cases = [{ // 标准文件
       testName: 'standard test',
       content: [
@@ -1190,7 +1190,7 @@ describe('util.md2JSON(iPath)', () => {
     it(item.testName, (done) => {
       fn.frag.build();
       // 创建 md
-      var mdPath = path.join(FRAG_PATH, '1.md');
+      const mdPath = path.join(FRAG_PATH, '1.md');
       fs.writeFileSync(mdPath, item.content);
 
       util.md2JSON(mdPath);
@@ -1230,7 +1230,7 @@ describe('util.path.resolve() test', () => {
 
 describe('util.path.formatUrl(url) test', () => {
   it('usage test', () => {
-    var r = 'css/base.css';
+    const r = 'css/base.css';
     expect(util.path.formatUrl('js/../css/base.css')).to.equal(r);
     expect(util.path.formatUrl('js/lib/../../css/base.css')).to.equal(r);
     expect(util.path.formatUrl('js/lib/main/../../../css/base.css')).to.equal(r);
@@ -1241,51 +1241,51 @@ describe('util.path.formatUrl(url) test', () => {
   });
 
   it('http: test', () => {
-    var r = 'http://web.yystatic.com/static/css/base.css';
+    const r = 'http://web.yystatic.com/static/css/base.css';
     expect(
       util.path.formatUrl('http://web.yystatic.com/static/js/../css/base.css')
     ).to.equal(r);
   });
 
   it('https: test', () => {
-    var r = 'https://web.yystatic.com/static/css/base.css';
+    const r = 'https://web.yystatic.com/static/css/base.css';
     expect(
       util.path.formatUrl('https://web.yystatic.com/static/js/../css/base.css')
     ).to.equal(r);
   });
   it('// test', () => {
-    var r = '//web.yystatic.com/static/css/base.css';
+    const r = '//web.yystatic.com/static/css/base.css';
     expect(util.path.formatUrl('//web.yystatic.com/static/js/../css/base.css')).to.equal(r);
   });
   it('/ test', () => {
-    var r = '/static/css/base.css';
+    const r = '/static/css/base.css';
     expect(util.path.formatUrl('/static/js/../css/base.css')).to.equal(r);
   });
 
   it('file: test', () => {
-    var r = 'file:///C:/static/css/base.css';
+    const r = 'file:///C:/static/css/base.css';
     expect(util.path.formatUrl('file:///C:/static/js/../css/base.css')).to.equal(r);
   });
 
   it('data: test', () => {
-    var r = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAYAAABXuSs3AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpFOEE4M0I5MzVGRTcxMUU3QkIyMUY0QjdDNjNEOTVGOCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpFOEE4M0I5NDVGRTcxMUU3QkIyMUY0QjdDNjNEOTVGOCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkU4QTgzQjkxNUZFNzExRTdCQjIxRjRCN0M2M0Q5NUY4IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkU4QTgzQjkyNUZFNzExRTdCQjIxRjRCN0M2M0Q5NUY4Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+KyjrvAAABYxJREFUeNrMWg1MVWUYfi4XAgkRFEMNScl+sDSyFv1jrCRzJpnmUvsTC5jZFpmLubZmtVyi2XSiRrMGQc1YzUqlzDSqmRUrRuL4UUEX5k+Qyo/5c3peznc5l3G559w/4N2ece+57/m+53vP971/B5tWD18lirhXYSIRT1xBXK5+byWOE41EJVFO7CFafJnU5iXxUGIWMZ94gLB7eP9FYidRSHxKnAs08UFENpFDXAn/yF/EKiKfaA8E8anEWuJqBEaEyWJiuxXlIAs6YcR6YlsASUONvU3NFearxWOJL4lb0bdSQTxE/O2NxROIH/qBtMgkNfdYT4nHEd8S49B/InPvUlwsEQ8nthJj0P8yRnEJt0J8DXEzBo4Il3fNDqcciK8wMGWa8jo9iIsLqgqwy/NFDhI3EB3yJdjph2xPSf9RDRw6CgxmVnLLjUxaIt3EeAb5ahrpMPWHRev6l4V4RDxBcXzH2eKhakWjrIzw+TfA0hVA7WHjmpCYxdi6/EWuPt643toG5BUwqhQx0zplXI8ewjD5JJBLKmGhlsk3qQV0QIgT8wjNDBdroeVkQOONvSJ8ELRNb+r6v22FljDavf6dk6Cd+NV8bicI1y6L7yDSzJabuxJYscH4PnwowIlxhHao+LO7bjpzxjImsO0dxrWRTHaTEvUnVddgXE9OAnYXW7Z8GfGgWDuKuGC20j0l0Gw2w1JzH4bWWmX8vrcU2sTrXVuV20IreAvahRpd91IdtLxcaHa7ofNKlmWLC9cosfgM2bZmy0x5HPh+n/55xv3AZ7Q8F9JNxLrPLQOKnEbjYlDKtGncVT3H3EArZ7+qoh4T5kYG+WFRlqyeLsS5AbDEbcLMVCfuLpqFtgmhHzrI+iVuRO/63+1lifMzSyEe9fnpvXsPGS95JvBLpf79fR74BbMtEV8l7jDRTGt/nT6JYz+6Iy1y3+06TFNTPrGZaQbxqhrL3iVRQv41ZlqnWrofMH/KqFineZqtJ2BCfISZVky08flok3+JS2ByyNAoy7fFCPFIM60J1zEbU+nYPj7W+kb/EX9kChOkycAdTKUWPWH5tgg5nJoVzbSnga/LjT284wOPQ7Y/5T+x42krmq8zlNvthteY/ixwtq3fiJ8V4sesaN52E6Pmy8Z3sX7qPODEP97N/HbBECROjev864WcFOK1VrWX0Mpv5BiBR9zY3Y/pGZ+nkl8cidZ2GzZ+Mtgb4nVC/IAndyxbBDCJ6to2NYeYrzBoVB7w0Jtc0v+eP2/zhnh1kOrleSQL5wBb1hlJUdNxPSWQaNlHUi5eRbznSS/6f51E07OAFnW8ZSHFa3QX52pPy7ZwZ+GQEA2Zc85g6cJ/zfqOw4NU13SnN8tOSSb5EiOadpwDZj/PrfRxT10z0o5ts7nUdM9L26TZUeUXevvMJPv7aQtw7VgjEmYyQ1y+1shvRMSSYlF3Ehys4ZlHz5hNWehcuoWp0m2ktwsQtzgtw0iYOpsicQDzdMTG9NSPnzy663Pj7iMel24Oi0udstKX0yLV0K6PgCn3GNfETZaV+/VQ5jmqfOeGUL6yutcSEQ588R7A6kjv5IzX01ZXYg8yDqQH7Yn1rjpZspLFvppE8pei1cC611hHluiLcSXZc08jPEz3IhblBYe1XXWyRAqIjAHWDNpMLHDXgnM0PX8kkgYI6d8JFo5oM2t6isJ0omEAkG5QXNqsdGs7Cx0i1dfD6odeYariAqvEHTfKI6roB9IVau5eDWf28uqYGmBTH5LeqOZ0WydYeesmLigTen+6PoCEZWzpz2c5uz1fiDtEmuoTiJdU6PWXNKkxZeztVm/y9ZX4U+oAefNKXF5MfYg+eiXuSqTrkqL25XiVBEmbJ8JR2EJ/XykHbb+KEfJPCM2+TPq/AAMAaYIpSV81Fh0AAAAASUVORK5CYII=';
+    const r = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAYAAABXuSs3AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpFOEE4M0I5MzVGRTcxMUU3QkIyMUY0QjdDNjNEOTVGOCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpFOEE4M0I5NDVGRTcxMUU3QkIyMUY0QjdDNjNEOTVGOCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkU4QTgzQjkxNUZFNzExRTdCQjIxRjRCN0M2M0Q5NUY4IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkU4QTgzQjkyNUZFNzExRTdCQjIxRjRCN0M2M0Q5NUY4Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+KyjrvAAABYxJREFUeNrMWg1MVWUYfi4XAgkRFEMNScl+sDSyFv1jrCRzJpnmUvsTC5jZFpmLubZmtVyi2XSiRrMGQc1YzUqlzDSqmRUrRuL4UUEX5k+Qyo/5c3peznc5l3G559w/4N2ece+57/m+53vP971/B5tWD18lirhXYSIRT1xBXK5+byWOE41EJVFO7CFafJnU5iXxUGIWMZ94gLB7eP9FYidRSHxKnAs08UFENpFDXAn/yF/EKiKfaA8E8anEWuJqBEaEyWJiuxXlIAs6YcR6YlsASUONvU3NFearxWOJL4lb0bdSQTxE/O2NxROIH/qBtMgkNfdYT4nHEd8S49B/InPvUlwsEQ8nthJj0P8yRnEJt0J8DXEzBo4Il3fNDqcciK8wMGWa8jo9iIsLqgqwy/NFDhI3EB3yJdjph2xPSf9RDRw6CgxmVnLLjUxaIt3EeAb5ahrpMPWHRev6l4V4RDxBcXzH2eKhakWjrIzw+TfA0hVA7WHjmpCYxdi6/EWuPt643toG5BUwqhQx0zplXI8ewjD5JJBLKmGhlsk3qQV0QIgT8wjNDBdroeVkQOONvSJ8ELRNb+r6v22FljDavf6dk6Cd+NV8bicI1y6L7yDSzJabuxJYscH4PnwowIlxhHao+LO7bjpzxjImsO0dxrWRTHaTEvUnVddgXE9OAnYXW7Z8GfGgWDuKuGC20j0l0Gw2w1JzH4bWWmX8vrcU2sTrXVuV20IreAvahRpd91IdtLxcaHa7ofNKlmWLC9cosfgM2bZmy0x5HPh+n/55xv3AZ7Q8F9JNxLrPLQOKnEbjYlDKtGncVT3H3EArZ7+qoh4T5kYG+WFRlqyeLsS5AbDEbcLMVCfuLpqFtgmhHzrI+iVuRO/63+1lifMzSyEe9fnpvXsPGS95JvBLpf79fR74BbMtEV8l7jDRTGt/nT6JYz+6Iy1y3+06TFNTPrGZaQbxqhrL3iVRQv41ZlqnWrofMH/KqFineZqtJ2BCfISZVky08flok3+JS2ByyNAoy7fFCPFIM60J1zEbU+nYPj7W+kb/EX9kChOkycAdTKUWPWH5tgg5nJoVzbSnga/LjT284wOPQ7Y/5T+x42krmq8zlNvthteY/ixwtq3fiJ8V4sesaN52E6Pmy8Z3sX7qPODEP97N/HbBECROjev864WcFOK1VrWX0Mpv5BiBR9zY3Y/pGZ+nkl8cidZ2GzZ+Mtgb4nVC/IAndyxbBDCJ6to2NYeYrzBoVB7w0Jtc0v+eP2/zhnh1kOrleSQL5wBb1hlJUdNxPSWQaNlHUi5eRbznSS/6f51E07OAFnW8ZSHFa3QX52pPy7ZwZ+GQEA2Zc85g6cJ/zfqOw4NU13SnN8tOSSb5EiOadpwDZj/PrfRxT10z0o5ts7nUdM9L26TZUeUXevvMJPv7aQtw7VgjEmYyQ1y+1shvRMSSYlF3Ehys4ZlHz5hNWehcuoWp0m2ktwsQtzgtw0iYOpsicQDzdMTG9NSPnzy663Pj7iMel24Oi0udstKX0yLV0K6PgCn3GNfETZaV+/VQ5jmqfOeGUL6yutcSEQ588R7A6kjv5IzX01ZXYg8yDqQH7Yn1rjpZspLFvppE8pei1cC611hHluiLcSXZc08jPEz3IhblBYe1XXWyRAqIjAHWDNpMLHDXgnM0PX8kkgYI6d8JFo5oM2t6isJ0omEAkG5QXNqsdGs7Cx0i1dfD6odeYariAqvEHTfKI6roB9IVau5eDWf28uqYGmBTH5LeqOZ0WydYeesmLigTen+6PoCEZWzpz2c5uz1fiDtEmuoTiJdU6PWXNKkxZeztVm/y9ZX4U+oAefNKXF5MfYg+eiXuSqTrkqL25XiVBEmbJ8JR2EJ/XykHbb+KEfJPCM2+TPq/AAMAaYIpSV81Fh0AAAAASUVORK5CYII=';
     expect(util.path.formatUrl(r)).to.equal(r);
   });
 
   it('about:blank test', () => {
-    var r = 'about:blank';
+    const r = 'about:blank';
     expect(util.path.formatUrl(r)).to.equal(r);
   });
 
   it('javascript test', () => {
-    var r = 'javascript:void(0);';
+    const r = 'javascript:void(0);';
     expect(util.path.formatUrl(r)).to.equal(r);
   });
 });
 
 describe('util.checkPortUseage(port) test', () => {
   it('useage test', () => {
-    var server = net.createServer().listen(1234);
+    const server = net.createServer().listen(1234);
     server.on('listening', () => {
       util.checkPortUseage(1234, (canUse) => {
         expect(canUse).to.equal(false);
@@ -1295,5 +1295,77 @@ describe('util.checkPortUseage(port) test', () => {
         expect(canUse).to.equal(true);
       });
     });
+  });
+});
+
+describe('util.getTime()', () => {
+  it('useage test', () => {
+    expect(util.getTime());
+    expect(util.getTime('2017-12-15 07:09:00')).to.equal('07:09:00');
+  });
+});
+
+
+describe('util.infoBar test', () => {
+  it('util.infoBar.init() test', () => {
+    expect(
+      util.infoBar.init({
+        hightlight: {
+          'A': 'magenta',
+          'M': 'blue',
+          'D': 'red',
+          'type:number': 'gray'
+        },
+        head: {
+          key: {
+            'js': {
+              name: 'JS',
+              color: 'black',
+              bgColor: 'bgYellow'
+            }
+          }
+        }
+      })
+    );
+  });
+  it('util.infoBar.print() test 01', (done) => {
+    expect(util.infoBar.js(123).end());
+    expect(util.infoBar.js(123, 456).end());
+    expect(util.infoBar.js({
+      barLeft: '11111111111111111111111111111111111111111111111111111111111111111111',
+      barRight: '123',
+      foot: util.getTime()
+    }).end());
+    expect(util.infoBar.js({
+      barLeft: '123',
+      barRight: '11111111111111111111111111111111111111111111111111111111111111111111',
+      foot: util.getTime()
+    }).end());
+    expect(util.infoBar.js({
+      barLeft: '11111111111111111111111111111111111111111111111111111111111111111111',
+      barRight: '2222222222222222222222222222222222222222222222222222222222222222222',
+      foot: util.getTime()
+    }).end());
+    done();
+  });
+  it('util.infoBar.print() test 02', function(done) {
+    this.timeout(0);
+    let i = 0;
+    const intervalKey = setInterval(() => {
+      if (i > 30) {
+        expect(util.infoBar.end());
+        expect(util.infoBar.done({
+          barLeft: i,
+          foot: `${new Date()}`.replace(/^.*(\d{2}:\d{2}:\d{2}).*$/, '$1')
+        }).end());
+        clearInterval(intervalKey);
+        done();
+      } else {
+        expect(util.infoBar.js({
+          barLeft: i++,
+          foot: `${new Date()}`.replace(/^.*(\d{2}:\d{2}:\d{2}).*$/, '$1')
+        }));
+      }
+    }, 100);
   });
 });

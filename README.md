@@ -510,6 +510,44 @@ util.openCMD(ctx);
 util.checkPortUseage(port, done);
 ```
 
+### util.infoBar
+```
+/**
+ * 初始化 infoBar
+ * @param {Object} op                             配置
+ * @param {Object} op.foot                        状态栏页脚配置项
+ * @param {String} op.foot.color                  页脚颜色
+ * @param {Number} op.foot.size                   页脚尺寸
+ * @param {String} op.head                        状态栏页头配置
+ * @param {Number} op.head.size                   页头尺寸
+ * @param {Object} op.head.key                    页头详细配置
+ * @param {Object} op.head.key                    页头详细配置
+ * @param {Object} op.head.key[name]              name 参数详细配置项
+ *                 - name [String]                键值名称,定义后可
+ *                                                直接通过 `util.infoBar[name]()` 进行调用
+ *
+ * @param {String} op.head.key[name].name         name 打印出来的名称
+ * @param {String} op.head.key[name].color        name 字体颜色
+ * @param {String} op.head.key[name].bgColor      name 背景颜色
+ */
+util.infoBar.init(op)
+
+/**
+ * @param {String} type        类型，默认有 done, info
+ * @param {String} op.barLeft  状态栏左侧 文案设置
+ * @param {String} op.barRight 状态栏右侧 文案设置
+ * @param {String} op.foot     状态栏页脚 文案设置，不设自动隐藏
+ */
+util.infoBar.print(type, op);
+
+/**
+ * 目前协定当一个状态栏已经停止不需要更新时，需要调用此方法进行结束
+ * 也可以这样调用:
+ * util.infoBar.done('123').end();
+ */
+util.infoBar.end();
+```
+
 ## 历史记录
 在 [这里](./history.md)
 
