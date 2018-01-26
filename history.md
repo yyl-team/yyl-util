@@ -1,4 +1,8 @@
 # 版本信息
+## 1.10.6(2018-01-27)
+* [ADD] 新增 `util.copyFiles(list, done)` done 回调函数新增 `files` 变量
+* [ADD] 新增 `util.removeFiles(list, done)` done 回调函数新增 `files` 变量
+
 ## 1.10.5(2018-01-22)
 * [ADD] 新增 `util.infoBar` 系列状态条方法
 * [ADD] 新增 `util.getTime()` 方法

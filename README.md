@@ -163,15 +163,15 @@ util.runNodeModule(ctx, done, op);
  * 单个文本方法
  * -------------
  * @param  {String}   path
- * @param  {function} callback
+ * @param  {function} callback(err, files)
  * @param  {RegExp}   filters
  *
  * --------------
  * 多个目录/文件方法
  * --------------
  * @param  {Array}    list
- * @param  {function} callback 回调方法
- * @param  {RegExp}   filters  忽略文件用 滤镜，选填参数
+ * @param  {function} callback(err, files) 回调方法
+ * @param  {RegExp}   filters              忽略文件用 滤镜，选填参数
  *
  * @return {Void}
  */
@@ -190,11 +190,14 @@ util.Promise(fn)
 ```
 /**
  * 获取目录下所有文件路径
- * @param  {String}          iPath            文件目录
- * @param  {Regex|Function}  filter           文件过滤正则
- *                           filter(filePath) 文件过滤函数 返回 true 则加入到返回列表
- * @param  {String}          filePath         文件目录
- * @return {Array}           files            文件列表
+ * @param  {String}          iPath                文件目录
+ * @param  {Function}        callback(err, files) 复制成功回调函数
+ *                           -err   [string]      错误信息
+ *                           -files [array]       复制成功的文件列表
+ * @param  {Regex|Function}  filter               文件过滤正则
+ *                           filter(filePath)     文件过滤函数 返回 true 则加入到返回列表
+ * @param  {String}          filePath             文件目录
+ * @return {Array}           files                文件列表
  */
 util.readFilesSync(iPath, filter);
 ```
@@ -217,8 +220,8 @@ util.readFilesSync(iPath, filter);
  * --------------
  * 多个目录/文件方法
  * --------------
- * @param  {Object}            list
- * @param  {function}        callback 回调方法
+ * @param  {Object}          list
+ * @param  {function}        callback(err, files) 回调方法
  * @param  {RegExp|function} filters  忽略文件用 滤镜
  *                           filters(iPath)                过滤函数
  *                           - @param  {String}  iPath     文件路径

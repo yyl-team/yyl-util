@@ -253,15 +253,16 @@ describe('util.runNodeModule(ctx, done, op)', () => {
 describe('util.removeFiles(list, callback, filters)', () => {
   it('callback test', (done) => {
     util.mkdirSync(path.join(__dirname, '1/2/3/4'));
-    util.removeFiles(path.join(__dirname, '1'), (err) => {
+    util.removeFiles(path.join(__dirname, '1'), (err, files) => {
       expect(err).to.be.equal(undefined);
+      expect(files.length).to.be.equal(4);
       done();
     }, null, true);
   });
 
   it('remove files include itself by short argu', () => {
     util.mkdirSync(path.join(__dirname, '1/2/3/4'));
-    expect(util.removeFiles(path.join(__dirname, '1'), true));
+    expect(util.removeFiles(path.join(__dirname, '1'), true).length).to.equal(4);
     expect(fs.existsSync(path.join(__dirname, '1'))).to.equal(false);
   });
 
@@ -270,14 +271,14 @@ describe('util.removeFiles(list, callback, filters)', () => {
     fs.writeFileSync(path.join(__dirname, '1/1.txt'), 'hello');
     fs.writeFileSync(path.join(__dirname, '1/2.txt'), 'hello');
 
-    expect(util.removeFiles(path.join(__dirname, '1'), /1\.txt$/));
+    expect(util.removeFiles(path.join(__dirname, '1'), /1\.txt$/).length).to.equal(1);
     expect(fs.existsSync(path.join(__dirname, '1/1.txt'))).to.equal(true);
   });
 
   it('remove files except itself by short argu', () => {
     util.mkdirSync(path.join(__dirname, '1/2/3/4'));
 
-    expect(util.removeFiles(path.join(__dirname, '1')));
+    expect(util.removeFiles(path.join(__dirname, '1')).length).to.equal(4);
     expect(fs.existsSync(path.join(__dirname, '1'))).to.equal(true);
     expect(util.removeFiles(path.join(__dirname, '1'), true));
   });
@@ -349,11 +350,12 @@ describe('util.copyFiles(list, callback, filters, render, basePath)', () => {
       path.join(FRAG_PATH, '01.txt')] = [path.join(FRAG_PATH2, '01.txt'),
       path.join(FRAG_PATH2, '02.txt')
     ];
-    util.copyFiles(obj, () => {
+    util.copyFiles(obj, (err, files) => {
       expect(
         fs.existsSync(path.join(FRAG_PATH2, '01.txt')) &&
-                fs.existsSync(path.join(FRAG_PATH2, '02.txt'))
+        fs.existsSync(path.join(FRAG_PATH2, '02.txt'))
       ).to.equal(true);
+      expect(files.length).to.equal(2);
 
       fn.frag.destory();
       done();
