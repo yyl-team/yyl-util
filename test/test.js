@@ -1314,14 +1314,17 @@ describe('util.getStrSize(str)', () => {
     )).to.equal(10);
   });
 });
-describe('util.subStr(str, begin, len)', () => {
+describe('util.substr(str, begin, len)', () => {
   const str = `${chalk.red('012')}${chalk.blue('345')}${chalk.white('67')}${chalk.black('89')}`;
+  const str2 = '12345678901234567890';
   it('useage test', () => {
-    expect(util.subStr(str, 0, 5)).to.equal(`${chalk.red('012')}${chalk.blue('34')}`);
-    expect(util.subStr(str, 3, 3)).to.equal(`${chalk.blue('345')}`);
-    expect(util.subStr(str, 0, 3)).to.equal(`${chalk.red('012')}`);
-    expect(util.subStr(str, 6, 2)).to.equal(`${chalk.white('67')}`);
-    expect(util.subStr(str, 3, 5)).to.equal(`${chalk.blue('345')}${chalk.white('67')}`);
+    expect(util.substr(str, 0, 5)).to.equal(`${chalk.red('012')}${chalk.blue('34')}`);
+    expect(util.substr(str, 3, 3)).to.equal(`${chalk.blue('345')}`);
+    expect(util.substr(str, 0, 3)).to.equal(`${chalk.red('012')}`);
+    expect(util.substr(str, 6, 2)).to.equal(`${chalk.white('67')}`);
+    expect(util.substr(str, 3, 5)).to.equal(`${chalk.blue('345')}${chalk.white('67')}`);
+    expect(util.substr(str2, 0, 15)).to.equal('123456789012345');
+    expect(util.substr(chalk.red(str2), 0, 15)).to.equal(chalk.red('123456789012345'));
   });
 });
 
@@ -1348,40 +1351,39 @@ describe('util.infoBar test', () => {
       })
     );
   });
-  it('util.infoBar.print() test 01', (done) => {
-    expect(util.infoBar.js(123).end());
-    expect(util.infoBar.js(123, 456).end());
-    expect(util.infoBar.js({
-      barLeft: '11111111111111111111111111111111111111111111111111111111111111111111',
-      barRight: '123',
-      foot: util.getTime()
-    }).end());
-    expect(util.infoBar.js({
-      barLeft: '123',
-      barRight: '11111111111111111111111111111111111111111111111111111111111111111111',
-      foot: util.getTime()
-    }).end());
-    expect(util.infoBar.js({
-      barLeft: '11111111111111111111111111111111111111111111111111111111111111111111',
-      barRight: '2222222222222222222222222222222222222222222222222222222222222222222',
-      foot: util.getTime()
-    }).end());
-    expect(util.infoBar.js({
-      barLeft: '11111111111111111111111111111111111111111111111111111111111111111111',
-      barRight: '123'
-    }).end());
-    expect(util.infoBar.js({
-      barLeft: '123',
-      barRight: '11111111111111111111111111111111111111111111111111111111111111111111'
-    }).end());
-    expect(util.infoBar.js({
-      barLeft: '11111111111111111111111111111111111111111111111111111111111111111111',
-      barRight: '2222222222222222222222222222222222222222222222222222222222222222222'
-    }).end());
+  it('util.infoBar.print() test usage', (done) => {
+    const str = '111111111111111111111111111111111111111111111111111111111111111111111';
+    const str2 = '22222222222222222222222222222222222222222222222222222222222222222222';
+    const shortStr = '123';
+    const shortStr2 = '456';
+    expect(util.infoBar.js(shortStr).end());
+    expect(util.infoBar.js(shortStr, shortStr2).end());
+    expect(util.infoBar.js({ barLeft: str, barRight: shortStr, foot: util.getTime() }).end());
+    expect(util.infoBar.js({ barLeft: shortStr, barRight: str, foot: util.getTime() }).end());
+    expect(util.infoBar.js({ barLeft: str, barRight: str2, foot: util.getTime() }).end());
+    expect(util.infoBar.js({ barLeft: str, barRight: shortStr }).end());
+    expect(util.infoBar.js({ barLeft: shortStr, barRight: str }).end());
+    expect(util.infoBar.js({ barLeft: str, barRight: str2 }).end());
 
     done();
   });
-  it('util.infoBar.print() test 02', function(done) {
+  it('util.infoBar.print() test usage with color', (done) => {
+    const str = `${chalk.red('111')}1111111111111111111111111111111111111111111111111111111111111111`;
+    const str2 = `${chalk.yellow('222')}22222222222222222222222222222222222222222222222222222222222222`;
+    const shortStr = chalk.red('123');
+    const shortStr2 = chalk.yellow('456');
+    expect(util.infoBar.js(shortStr).end());
+    expect(util.infoBar.js(shortStr, shortStr2).end());
+    expect(util.infoBar.js({ barLeft: str, barRight: shortStr, foot: util.getTime() }).end());
+    expect(util.infoBar.js({ barLeft: shortStr, barRight: str, foot: util.getTime() }).end());
+    expect(util.infoBar.js({ barLeft: str, barRight: str2, foot: util.getTime() }).end());
+    expect(util.infoBar.js({ barLeft: str, barRight: shortStr }).end());
+    expect(util.infoBar.js({ barLeft: shortStr, barRight: str }).end());
+    expect(util.infoBar.js({ barLeft: str, barRight: str2 }).end());
+
+    done();
+  });
+  it('util.infoBar.print() test interval', function(done) {
     this.timeout(0);
     let i = 0;
     const intervalKey = setInterval(() => {
@@ -1401,7 +1403,7 @@ describe('util.infoBar test', () => {
       }
     }, 100);
   });
-  it('util.infoBar.print() test 03', function(done) {
+  it('util.infoBar.print() test interval without foot', function(done) {
     this.timeout(0);
     let i = 0;
     const intervalKey = setInterval(() => {
@@ -1420,7 +1422,7 @@ describe('util.infoBar test', () => {
     }, 100);
   });
 
-  it('util.infoBar.print() test 04', () => {
+  it('util.infoBar.print() test barLeft array', () => {
     expect(util.infoBar.js({
       barLeft: [
         '11111111111111111111111111111111111111111111111111111111111111111111',

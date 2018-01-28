@@ -561,7 +561,7 @@ util.infoBar.end();
 util.getStrSize(str)
 ```
 
-### util.subStr(str, begin, len)
+### util.substr(str, begin, len)
 ```
 /**
  * 截取带颜色文字的长度
@@ -570,7 +570,7 @@ util.getStrSize(str)
  * @param  {Number} len   长度
  * @return {String} r     截取后的字符串
  */
-util.subStr(str, begin, len)
+util.substr(str, begin, len)
 ```
 
 ## 历史记录
