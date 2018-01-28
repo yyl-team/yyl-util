@@ -1,4 +1,7 @@
 # 版本信息
+## 1.10.7(2018-01-28)
+* [FIX] 修复 `util.infoBar.print` 在没有 `op.foot` 时显示问题
+
 ## 1.10.6(2018-01-27)
 * [ADD] 新增 `util.copyFiles(list, done)` done 回调函数新增 `files` 变量
 * [ADD] 新增 `util.removeFiles(list, done)` done 回调函数新增 `files` 变量

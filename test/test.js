@@ -1348,13 +1348,26 @@ describe('util.infoBar test', () => {
       barRight: '2222222222222222222222222222222222222222222222222222222222222222222',
       foot: util.getTime()
     }).end());
+    expect(util.infoBar.js({
+      barLeft: '11111111111111111111111111111111111111111111111111111111111111111111',
+      barRight: '123'
+    }).end());
+    expect(util.infoBar.js({
+      barLeft: '123',
+      barRight: '11111111111111111111111111111111111111111111111111111111111111111111'
+    }).end());
+    expect(util.infoBar.js({
+      barLeft: '11111111111111111111111111111111111111111111111111111111111111111111',
+      barRight: '2222222222222222222222222222222222222222222222222222222222222222222'
+    }).end());
+
     done();
   });
   it('util.infoBar.print() test 02', function(done) {
     this.timeout(0);
     let i = 0;
     const intervalKey = setInterval(() => {
-      if (i > 30) {
+      if (i > 15) {
         expect(util.infoBar.end());
         expect(util.infoBar.done({
           barLeft: i,
@@ -1366,6 +1379,24 @@ describe('util.infoBar test', () => {
         expect(util.infoBar.js({
           barLeft: i++,
           foot: `${new Date()}`.replace(/^.*(\d{2}:\d{2}:\d{2}).*$/, '$1')
+        }));
+      }
+    }, 100);
+  });
+  it('util.infoBar.print() test 02', function(done) {
+    this.timeout(0);
+    let i = 0;
+    const intervalKey = setInterval(() => {
+      if (i > 15) {
+        expect(util.infoBar.end());
+        expect(util.infoBar.done({
+          barLeft: i
+        }).end());
+        clearInterval(intervalKey);
+        done();
+      } else {
+        expect(util.infoBar.js({
+          barLeft: i++
         }));
       }
     }, 100);
