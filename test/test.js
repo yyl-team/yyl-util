@@ -3,6 +3,7 @@ const util = require('../index.js');
 const expect = require('chai').expect;
 const path = require('path');
 const fs = require('fs');
+const chalk = require('chalk');
 const net = require('net');
 const FRAG_PATH = path.join(__dirname, 'frag');
 const FRAG_PATH2 = path.join(__dirname, 'frag2');
@@ -1304,6 +1305,23 @@ describe('util.getTime()', () => {
   it('useage test', () => {
     expect(util.getTime());
     expect(util.getTime('2017-12-15 07:09:00')).to.equal('07:09:00');
+  });
+});
+describe('util.getStrSize(str)', () => {
+  it('useage test', () => {
+    expect(util.getStrSize(
+      `${chalk.red('012')}${chalk.blue('345')}${chalk.white('67')}${chalk.black('89')}`
+    )).to.equal(10);
+  });
+});
+describe('util.subStr(str, begin, len)', () => {
+  const str = `${chalk.red('012')}${chalk.blue('345')}${chalk.white('67')}${chalk.black('89')}`;
+  it('useage test', () => {
+    expect(util.subStr(str, 0, 5)).to.equal(`${chalk.red('012')}${chalk.blue('34')}`);
+    expect(util.subStr(str, 3, 3)).to.equal(`${chalk.blue('345')}`);
+    expect(util.subStr(str, 0, 3)).to.equal(`${chalk.red('012')}`);
+    expect(util.subStr(str, 6, 2)).to.equal(`${chalk.white('67')}`);
+    expect(util.subStr(str, 3, 5)).to.equal(`${chalk.blue('345')}${chalk.white('67')}`);
   });
 });
 

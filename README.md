@@ -551,6 +551,28 @@ util.infoBar.print(type, op);
 util.infoBar.end();
 ```
 
+### util.getStrSize(str)
+```
+/**
+ * 获取带颜色的字符串长度
+ * @param  {String} str
+ * @return {Number} length
+ */
+util.getStrSize(str)
+```
+
+### util.subStr(str, begin, len)
+```
+/**
+ * 截取带颜色文字的长度
+ * @param  {String} str   带颜色字符串
+ * @param  {Number} begin 开始位置
+ * @param  {Number} len   长度
+ * @return {String} r     截取后的字符串
+ */
+util.subStr(str, begin, len)
+```
+
 ## 历史记录
 在 [这里](./history.md)
 

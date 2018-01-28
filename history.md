@@ -1,4 +1,9 @@
 # 版本信息
+## 1.11.0(2018-01-29)
+* [ADD] 新增 `util.getStrSize(str)` 方法
+* [ADD] 新增 `util.subStr(str, begin, len)` 方法
+* [TODO] util.infoBar.print 支持带颜色的文本
+
 ## 1.10.8(2018-01-28)
 * [EDIT] `util.infoBar.print` `op.barLeft` 支持多行输出
 
