@@ -1,4 +1,7 @@
 # 版本信息
+## 1.10.8(2018-01-28)
+* [EDIT] `util.infoBar.print` `op.barLeft` 支持多行输出
+
 ## 1.10.7(2018-01-28)
 * [FIX] 修复 `util.infoBar.print` 在没有 `op.foot` 时显示问题
 

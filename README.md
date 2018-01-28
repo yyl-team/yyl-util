@@ -536,10 +536,10 @@ util.checkPortUseage(port, done);
 util.infoBar.init(op)
 
 /**
- * @param {String} type        类型，默认有 done, info
- * @param {String} op.barLeft  状态栏左侧 文案设置
- * @param {String} op.barRight 状态栏右侧 文案设置
- * @param {String} op.foot     状态栏页脚 文案设置，不设自动隐藏
+ * @param {String}       type        类型，默认有 done, info
+ * @param {String|Array} op.barLeft  状态栏左侧 文案设置
+ * @param {String}       op.barRight 状态栏右侧 文案设置
+ * @param {String}       op.foot     状态栏页脚 文案设置，不设自动隐藏
  */
 util.infoBar.print(type, op);
 
