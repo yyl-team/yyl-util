@@ -150,7 +150,7 @@ describe('util.requireJs(iPath)', () => {
     this.timeout(0);
     fn.frag.destory();
     fn.frag.build();
-    const FRAG_JS_PATH = path.join(FRAG_PATH, '01.js');
+    const FRAG_JS_PATH = util.path.join(FRAG_PATH, '01.js');
     const param = {
       i: 1
     };
