@@ -1,4 +1,7 @@
 # 版本信息
+## 1.12.1(2018-02-20)
+* [FIX]  修复 `util.runCMD(cmd, done, path, showLog, newWindow)` 在 mac 上新窗口打开时 路径不对问题
+
 ## 1.12.0(2018-02-20)
 * [ADD] `util.runCMD(cmd, done, path, showLog, newWindow)` `newWindow` 参数
 
