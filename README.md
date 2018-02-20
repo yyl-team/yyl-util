@@ -114,16 +114,18 @@ util.openPath(iPath);
 util.joinFormat();
 ```
 
-### util.runCMD(str, callback, path, showOutput);
+### util.runCMD(str, callback, path, showOutput, newWindow);
 ```
 /**
  * 运行 cmd
  * @param  {String|Array} str             cmd执行语句 or 数组
  * @param  {funciton}     callback(error) 回调函数
  *                        - error         错误信息
+ * @param  {Boolean}      showOutput      显示日志
+ * @param  {Boolean}      newWindow       新窗口打开
  * @return {Void}
  */
-util.runCMD(str, callback, path, showOutput);
+util.runCMD(str, callback, path, showOutput, newWindow);
 ```
 
 ### util.runSpawn(ctx, done, iPath, showOutput);

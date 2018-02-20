@@ -1,4 +1,7 @@
 # 版本信息
+## 1.12.0(2018-02-20)
+* [ADD] `util.runCMD(cmd, done, path, showLog, newWindow)` `newWindow` 参数
+
 ## 1.11.1(2018-01-31)
 * [FIX] 修复 `util.requireJs(iPath)` 当 路径 被格式化后， 获取回来的还是有缓存 的问题
 

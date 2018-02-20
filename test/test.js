@@ -243,7 +243,8 @@ describe('util.runSpawn(ctx, done, iPath, showOutput)', () => {
 });
 
 describe('util.runNodeModule(ctx, done, op)', () => {
-  it('useage test', (done) => {
+  it('useage test', function(done) {
+    this.timeout(0);
     expect(util.runNodeModule('yyl', (err) => {
       expect(Boolean(err)).to.be.equal(false);
       done();
