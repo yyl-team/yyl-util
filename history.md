@@ -1,4 +1,7 @@
 # 版本信息
+## 1.12.2(2018-02-22)
+* [FIX]  修复 `util.runCMD(cmd, done, path, showLog, newWindow)` 在 mac 上有几率出现 先执行 `yyl server start` 后打开新 tab 的问题
+
 ## 1.12.1(2018-02-20)
 * [FIX]  修复 `util.runCMD(cmd, done, path, showLog, newWindow)` 在 mac 上新窗口打开时 路径不对问题
 
