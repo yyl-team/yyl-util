@@ -1,4 +1,7 @@
 # 版本信息
+## 1.12.3(2018-02-24)
+* [FIX]  修复 `util.runCMD(cmd, done, path, showLog, newWindow)` 在 window 上不回调问题
+
 ## 1.12.2(2018-02-22)
 * [FIX]  修复 `util.runCMD(cmd, done, path, showLog, newWindow)` 在 mac 上有几率出现 先执行 `yyl server start` 后打开新 tab 的问题
 
