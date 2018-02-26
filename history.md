@@ -1,4 +1,7 @@
 # 版本信息
+## 1.12.4(2018-02-26)
+* [FIX]  修复 组件 获取`process.stdout.columns` 有时候会出现 获取不到问题
+
 ## 1.12.3(2018-02-24)
 * [FIX]  修复 `util.runCMD(cmd, done, path, showLog, newWindow)` 在 window 上不回调问题
 
