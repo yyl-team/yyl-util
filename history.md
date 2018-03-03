@@ -1,4 +1,7 @@
 # 版本信息
+## 1.13.0(2018-03-03)
+* [ADD]  `util.infoBar.print(type, op)` `barLeft:Array` 时 支持换行
+
 ## 1.12.3(2018-02-24)
 * [FIX]  修复 `util.runCMD(cmd, done, path, showLog, newWindow)` 在 window 上不回调问题
 
