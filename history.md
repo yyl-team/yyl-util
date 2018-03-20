@@ -1,4 +1,7 @@
 # 版本信息
+## 1.13.1(2018-03-20)
+* [ADD]  `util.requireJs()` 如果内容报错 会抛出错误
+
 ## 1.13.0(2018-03-03)
 * [ADD]  `util.infoBar.print(type, op)` `barLeft:Array` 时 支持换行
 ## 1.12.4(2018-02-26)
