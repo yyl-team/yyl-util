@@ -198,10 +198,11 @@ util.Promise(fn)
  *                           -files [array]       复制成功的文件列表
  * @param  {Regex|Function}  filter               文件过滤正则
  *                           filter(filePath)     文件过滤函数 返回 true 则加入到返回列表
- * @param  {String}          filePath             文件目录
+ * @param  {String}          -filePath            文件目录
+ * @param  {Boolean}         reverse              结果取相反
  * @return {Array}           files                文件列表
  */
-util.readFilesSync(iPath, filter);
+util.readFilesSync(iPath, filter, reverse);
 ```
 
 ### util.copyFiles(list, callback, filters, render, basePath, silent);
