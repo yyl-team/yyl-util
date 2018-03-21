@@ -1,6 +1,6 @@
 # 版本信息
-## 1.14.1(2018-03-21)
-* [ADD]  新增 `util.readFilesSync(iPath, filter, reverse)` `reverse` 参数
+## 1.14.2(2018-03-21)
+* [ADD]  新增 `util.readFilesSync(iPath, filter, ignoreFilter)` `ignoreFilter` 参数
 
 ## 1.13.1(2018-03-20)
 * [ADD]  `util.requireJs()` 如果内容报错 会抛出错误

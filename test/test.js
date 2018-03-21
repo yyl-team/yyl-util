@@ -35,41 +35,41 @@ const
   };
 
 const TEST_CTRL = {
-  READDIR_SYNC: true,
-  ENV_STRINGIFY: true,
-  ENV_PARSE: true,
-  // OPEN_BROWSER: true,
-  BUILD_TREE: true,
-  FIND_PATH_SYNC: true,
-  REQUIRE_JS: true,
-  MKDIR_SYNC: true,
-  MAKE_CSS_JS_DATE: true,
-  // OPEN_PATH: true,
-  JOIN_FORMAT: true,
-  RUN_CMD: true,
-  RUN_SPAWN: true,
-  RUN_NODE_MODULE: true,
-  REMOVE_FILES: true,
-  PROMISE: true,
+  // READDIR_SYNC: true,
+  // ENV_STRINGIFY: true,
+  // ENV_PARSE: true,
+  // // OPEN_BROWSER: true,
+  // BUILD_TREE: true,
+  // FIND_PATH_SYNC: true,
+  // REQUIRE_JS: true,
+  // MKDIR_SYNC: true,
+  // MAKE_CSS_JS_DATE: true,
+  // // OPEN_PATH: true,
+  // JOIN_FORMAT: true,
+  // RUN_CMD: true,
+  // RUN_SPAWN: true,
+  // RUN_NODE_MODULE: true,
+  // REMOVE_FILES: true,
+  // PROMISE: true,
   READ_FILES_SYNC: true,
-  COPY_FILES: true,
-  TIMER: true,
-  HELP: true,
-  MSG: true,
-  MAKE_ARRAY: true,
-  TYPE: true,
-  EXTEND: true,
-  GET: true,
-  POP: true,
-  COMPARE_VERSION: true,
-  TASK_QUEUE: true,
-  DEBOUNCE: true,
-  MD_2_JSON: true,
-  CHECK_PORT_USEAGE: true,
-  GET_TIME: true,
-  GET_STR_SIZE: true,
-  SUBSTR: true,
-  INFO_BAR: true
+  // COPY_FILES: true,
+  // TIMER: true,
+  // HELP: true,
+  // MSG: true,
+  // MAKE_ARRAY: true,
+  // TYPE: true,
+  // EXTEND: true,
+  // GET: true,
+  // POP: true,
+  // COMPARE_VERSION: true,
+  // TASK_QUEUE: true,
+  // DEBOUNCE: true,
+  // MD_2_JSON: true,
+  // CHECK_PORT_USEAGE: true,
+  // GET_TIME: true,
+  // GET_STR_SIZE: true,
+  // SUBSTR: true,
+  // INFO_BAR: true
 };
 if (TEST_CTRL.READDIR_SYNC) {
   describe('util.readdirSync(iPath, filter)', () => {
@@ -144,8 +144,8 @@ if (TEST_CTRL.ENV_PARSE) {
 
 if (TEST_CTRL.OPEN_BROWSER) {
   describe('util.openBrowser(address)', () => {
-    it('useage test', function() {
-        expect(util.openBrowser('http://www.yy.com'));
+    it('useage test', () => {
+      expect(util.openBrowser('http://www.yy.com'));
     });
   });
 }
@@ -238,8 +238,8 @@ if (TEST_CTRL.MAKE_CSS_JS_DATE) {
 
 if (TEST_CTRL.OPEN_PATH) {
   describe('util.openPath(iPath)', () => {
-    it('useage test', function() {
-        expect(util.openPath(__dirname));
+    it('useage test', () => {
+      expect(util.openPath(__dirname));
     });
   });
 }
@@ -410,27 +410,6 @@ if (TEST_CTRL.READ_FILES_SYNC) {
       fn.frag.destory();
     });
 
-    it('filter regex reverse test', () => {
-      fn.frag.build();
-      util.mkdirSync(path.join(FRAG_PATH, 'one'));
-      util.mkdirSync(path.join(FRAG_PATH, 'two'));
-
-      fs.writeFileSync(path.join(FRAG_PATH, 'one/01.txt'), '123');
-      fs.writeFileSync(path.join(FRAG_PATH, 'one/02.txt'), '123');
-      fs.writeFileSync(path.join(FRAG_PATH, 'one/03.txt'), '123');
-
-      fs.writeFileSync(path.join(FRAG_PATH, 'two/01.txt'), '123');
-      fs.writeFileSync(path.join(FRAG_PATH, 'two/02.txt'), '123');
-      fs.writeFileSync(path.join(FRAG_PATH, 'two/03.txt'), '123');
-      const files = util.readFilesSync(FRAG_PATH, /one/, true);
-      expect(files).to.deep.equal([
-        util.path.join(FRAG_PATH, 'two/01.txt'),
-        util.path.join(FRAG_PATH, 'two/02.txt'),
-        util.path.join(FRAG_PATH, 'two/03.txt')
-      ]);
-      fn.frag.destory();
-    });
-
     it('filter function test', () => {
       fn.frag.build();
       util.mkdirSync(path.join(FRAG_PATH, 'one'));
@@ -455,7 +434,7 @@ if (TEST_CTRL.READ_FILES_SYNC) {
       fn.frag.destory();
     });
 
-    it('filter function reverse test', () => {
+    it('filter ignoreFilter test', () => {
       fn.frag.build();
       util.mkdirSync(path.join(FRAG_PATH, 'one'));
       util.mkdirSync(path.join(FRAG_PATH, 'two'));
@@ -470,12 +449,8 @@ if (TEST_CTRL.READ_FILES_SYNC) {
 
       const files = util.readFilesSync(FRAG_PATH, (iPath) => {
         return /one/.test(iPath);
-      }, true);
-      expect(files).to.deep.equal([
-        util.path.join(FRAG_PATH, 'two/01.txt'),
-        util.path.join(FRAG_PATH, 'two/02.txt'),
-        util.path.join(FRAG_PATH, 'two/03.txt')
-      ]);
+      }, /one/);
+      expect(files).to.deep.equal([]);
       fn.frag.destory();
     });
   });
