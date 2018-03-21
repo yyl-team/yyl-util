@@ -319,12 +319,19 @@ describe('util.readFilesSync(iPath, filter)', () => {
     fn.frag.destory();
   });
   it('filter regex test', () => {
-    expect(
-      util.readFilesSync(
-        path.join(__dirname, '../node_modules'),
-        /^(?!.*?node_modules).*$/
-      ).length
-    ).to.equal(0);
+    const files = util.readFilesSync(path.join(__dirname, '..'), /node_modules/);
+    let includeIgnore = false;
+    files.some((iPath) => {
+      if (/node_modules/.test(
+        util.path.relative(
+          path.join(__dirname, '..'),
+          iPath
+        )
+      )) {
+        includeIgnore = true;
+      }
+    });
+    expect(includeIgnore).to.equal(false);
   });
 
   it('filter function test', () => {
