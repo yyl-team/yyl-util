@@ -1,6 +1,6 @@
 {
   "name": "yyl-util",
-  "version": "1.14.2",
+  "version": "1.14.3",
   "description": "node function util",
   "main": "lib/util.js",
   "scripts": {

@@ -1,4 +1,7 @@
 # 版本信息
+## 1.14.3(2018-04-18)
+* [FIX]  修复 `util.infoBar.print()` 显示多行时会少了最后一个字的问题
+
 ## 1.14.2(2018-03-21)
 * [ADD]  新增 `util.readFilesSync(iPath, filter, ignoreFilter)` `ignoreFilter` 参数
 
