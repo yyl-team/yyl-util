@@ -1,4 +1,7 @@
 # 版本信息
+## 1.14.4(2018-08-13)
+* [EDIT] linux 下 `util.openBrowser()` `util.openPath()` 改为不做处理
+
 ## 1.14.3(2018-04-18)
 * [FIX]  修复 `util.infoBar.print()` 显示多行时会少了最后一个字的问题
 
