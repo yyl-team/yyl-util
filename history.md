@@ -1,4 +1,7 @@
 # 版本信息
+## 1.15.0(2018-12-21)
+* [ADD] 新增 `util.makeAwait(fn)` 方法
+
 ## 1.14.4(2018-08-13)
 * [EDIT] linux 下 `util.openBrowser()` `util.openPath()` 改为不做处理
 
