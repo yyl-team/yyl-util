@@ -576,6 +576,18 @@ util.getStrSize(str)
 util.substr(str, begin, len)
 ```
 
+### util.makeAwait(fn)
+```
+/**
+ * 截取带颜色文字的长度
+ * @param  {function} fn(next, reject) 让函数变成 await 形式
+ * @param  {function} next
+ * @param  {function} reject
+ * @return {Promise} r
+ */
+util.makeAwait(fn)
+```
+
 ## 历史记录
 在 [这里](./history.md)
 
