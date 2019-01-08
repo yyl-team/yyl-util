@@ -1,4 +1,7 @@
 # 版本信息
+## 1.15.1(2019-01-08)
+* [FIX] 修复 `util.envParse()` boolean 处理 bug
+
 ## 1.15.0(2018-12-21)
 * [ADD] 新增 `util.makeAwait(fn)` 方法
 

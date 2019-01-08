@@ -134,6 +134,9 @@ if (TEST_CTRL.ENV_PARSE) {
       expect(util.envParse(['--name', 'true'])).to.deep.equal({
         name: true
       });
+      expect(util.envParse(['--name', 'false'])).to.deep.equal({
+        name: false
+      });
       expect(util.envParse(['--name', '123'])).to.deep.equal({
         name: 123
       });
