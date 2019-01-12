@@ -1,4 +1,40 @@
 # 版本信息
+## 2.0.0(2019-01-12)
+* [DEL] 删除 `util.readdirSync()` 函数
+* [DEL] 删除 `util.openBrowser()` 函数
+* [DEL] 删除 `util.buildTree()` 函数
+* [DEL] 删除 `util.findPathSync()` 函数
+* [DEL] 删除 `util.mkdirSync()` 函数
+* [DEL] 删除 `util.openPath()` 函数
+* [DEL] 删除 `util.joinFormat()` 函数
+* [DEL] 删除 `util.runCMD()` 函数
+* [DEL] 删除 `util.runSpawn()` 函数
+* [DEL] 删除 `util.runNodeModule()` 函数
+* [DEL] 删除 `util.removeFiles()` 函数
+* [DEL] 删除 `util.Promise()` 函数
+* [DEL] 删除 `util.readFilesSync()` 函数
+* [DEL] 删除 `util.copyFiles()` 函数
+* [DEL] 删除 `util.timer` 函数
+* [DEL] 删除 `util.help()` 函数
+* [DEL] 删除 `util.msg` 函数
+* [DEL] 删除 `util.help()` 函数
+* [DEL] 删除 `util.get()` 函数
+* [DEL] 删除 `util.pop()` 函数
+* [DEL] 删除 `util.taskQueue` 函数
+* [DEL] 删除 `util.debounce()` 函数
+* [DEL] 删除 `util.md2JSON()` 函数
+* [DEL] 删除 `util.cleanScreen()` 函数
+* [DEL] 删除 `util.openCMD()` 函数
+* [DEL] 删除 `util.checkPortUseage()` 函数
+* [DEL] 删除 `util.infoBar` 函数
+* [DEL] 删除 `util.getStrSize()` 函数
+* [DEL] 删除 `util.substr()` 函数
+* [ADD] 添加 `util.waitFor()` 函数
+* [ADD] 添加 `util.makeAsync()` 函数
+* [ADD] 添加 `util.shortEnvParse()` 函数
+* [ADD] 添加 `util.shortEnvStringify()` 函数
+
+
 ## 1.15.1(2019-01-08)
 * [FIX] 修复 `util.envParse()` boolean 处理 bug
 
