@@ -1,6 +1,6 @@
 {
   "name": "yyl-util",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "node function util",
   "main": "lib/util.js",
   "scripts": {
@@ -22,8 +22,7 @@
     "url": "https://github.com/jackness1208/yyl-util/issues"
   },
   "homepage": "https://github.com/jackness1208/yyl-util#readme",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "chai": "^4.1.2",
     "yyl-fs": "^0.1.1"
