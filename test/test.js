@@ -18,7 +18,8 @@ const TEST_CTRL = {
   SHORT_ENV_PARSE: true,
   MAKE_AWAIT: true,
   MAKE_ASYNC: true,
-  WAIT_FOR: true
+  WAIT_FOR: true,
+  FOR_EACH: true
 };
 
 const FRAG_PATH = path.join(__dirname, '__frag');
@@ -460,6 +461,33 @@ if (TEST_CTRL.WAIT_FOR) {
       const now = new Date();
       await util.waitFor(200);
       expect(new Date() - now >= 200).to.equal(true);
+    }, true));
+  });
+}
+
+if (TEST_CTRL.FOR_EACH) {
+  describe('util.forEach(arr, fn)', () => {
+    it ('usage test', util.makeAsync(async () => {
+      let count = 0;
+      await util.forEach([1, 2, 3], async (num) => {
+        await util.waitFor(10);
+        count = count + num;
+      });
+
+      expect(count).to.equal(6);
+    }, true));
+
+    it ('return true test', util.makeAsync(async () => {
+      let count = 0;
+      await util.forEach([1, 2, 3], async (num, index) => {
+        await util.waitFor(10);
+        count = count + num;
+        if (index === 1) {
+          return true;
+        }
+      });
+
+      expect(count).to.equal(3);
     }, true));
   });
 }

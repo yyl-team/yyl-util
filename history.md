@@ -1,4 +1,7 @@
 # 版本信息
+## 2.1.0(2019-01-16)
+* [ADD] 新增 `util.forEach(arr, fn)` 函数
+
 ## 2.0.0(2019-01-12)
 * [DEL] 删除 `util.readdirSync()` 函数
 * [DEL] 删除 `util.openBrowser()` 函数

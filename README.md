@@ -155,6 +155,20 @@ util.shortEnvStringify(obj)
 util.makeAsync(fn, isMocha);
 ```
 
+### util.forEach(arr, fn)
+```
+/**
+ * forEach asycn 版本, 如果 fn 内 返回 true 则会终止循环
+ * @param  {Array}    arr              需要循环的数组
+ * @param  {Function} fn(item, index)  循环中的回调函数
+ * @param  {Any}      item             arr[i] 内容
+ * @param  {Number}   index            arr 下标
+ * @return {void}
+ */
+util.forEach(arr, fn);
+```
+
+
 
 ## 历史记录
 在 [这里](./history.md)
