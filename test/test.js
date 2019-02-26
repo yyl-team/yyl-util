@@ -380,6 +380,12 @@ if (TEST_CTRL.MAKE_ASYNC) {
       await fn.frag.build();
       await fn.frag.destory();
     }, true));
+
+    it ('util.makeAsync(fn, true)', util.makeAsync(async () => {
+      (util.makeAsync(async () => {
+        await util.waitFor(200);
+      }))();
+    }, true));
   });
 }
 

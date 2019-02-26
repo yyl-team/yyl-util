@@ -1,4 +1,6 @@
 # 版本信息
+## 2.1.1(2019-02-21)
+* [EDIT] `util.makeAsync()` 能正常 throw error
 ## 2.1.0(2019-01-16)
 * [ADD] 新增 `util.forEach(arr, fn)` 函数
 
