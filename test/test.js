@@ -14,6 +14,7 @@ const TEST_CTRL = {
   TYPE: true,
   EXTEND: true,
   COMPARE_VERSION: true,
+  MATCH_VERSION: true,
   SHORT_ENV_STRINGIFY: true,
   SHORT_ENV_PARSE: true,
   MAKE_AWAIT: true,
@@ -305,6 +306,7 @@ if (TEST_CTRL.COMPARE_VERSION) {
     it('normal compare', () => {
       expect(util.compareVersion('2.0.1', '2.0.0')).to.equal(1);
       expect(util.compareVersion('2.1.0', '2.0.0')).to.equal(1);
+      expect(util.compareVersion('2.1.0', '2.1.0')).to.equal(0);
       expect(util.compareVersion('2.1.0', '2.0.1')).to.equal(1);
       expect(util.compareVersion('1.1.0', '2.0.0')).to.equal(-1);
     });
@@ -313,6 +315,29 @@ if (TEST_CTRL.COMPARE_VERSION) {
       expect(util.compareVersion('~2.1.0', '2.0.0')).to.equal(1);
       expect(util.compareVersion('v2.1.0', '2.0.1')).to.equal(1);
       expect(util.compareVersion('^1.1.0', '~2.0.0')).to.equal(-1);
+
+      expect(util.compareVersion('~2.1.0', '2.1.0')).to.equal(0);
+      expect(util.compareVersion('^2.1.0', '2.1.0')).to.equal(0);
+      expect(util.compareVersion('v2.1.0', '2.1.0')).to.equal(0);
+      expect(util.compareVersion(1, 1)).to.equal(0);
+    });
+  });
+}
+if (TEST_CTRL.MATCH_VERSION) {
+  describe('util.matchVersion(v1, v2)', () => {
+    it('usage check', () => {
+      expect(util.matchVersion('^2.0.1', '2.0.0')).to.equal(false);
+      expect(util.matchVersion('^2.0.1', '2.1.0')).to.equal(true);
+      expect(util.matchVersion('^2.0.1', '3.0.0')).to.equal(false);
+
+      expect(util.matchVersion('~2.0.1', '2.0.0')).to.equal(false);
+      expect(util.matchVersion('~2.0.1', '2.0.1')).to.equal(true);
+      expect(util.matchVersion('~2.0.1', '3.0.0')).to.equal(false);
+
+      expect(util.matchVersion('2.0.1', '2.0.1')).to.equal(true);
+      expect(util.matchVersion('2.0.1', '2.0.2')).to.equal(false);
+
+      expect(util.matchVersion('v2.1.0', 'v2.1.0')).to.equal(true);
     });
   });
 }

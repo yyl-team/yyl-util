@@ -84,6 +84,17 @@ util.extend();
 util.compareVersion(v1, v2);
 ```
 
+### util.matchVersion(v1, v2)
+```
+/**
+ * 校验版本是否匹配
+ * @param  {String} v1      带特殊字符的版本
+ * @param  {String} v2      不带特殊字符的版本
+ * @return {Boolean} result 结果
+ */
+util.matchVersion(v1, v2);
+```
+
 ### util.path
 ```
 /**
