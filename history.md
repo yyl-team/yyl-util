@@ -1,4 +1,7 @@
 # 版本信息
+## 2.3.0(2019-05-21)
+* [ADD] 新增 `util.cmdParse(process.argv)` 函数
+
 ## 2.2.0(2019-02-26)
 * [ADD] 新增 `util.matchVersion(ver1, ver)` 函数
 

@@ -1,8 +1,9 @@
 {
   "name": "yyl-util",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "node function util",
   "main": "lib/util.js",
+  "types": "lib/util.d.ts",
   "scripts": {
     "test": "mocha ./test/test.js"
   },
