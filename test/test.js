@@ -1,11 +1,13 @@
 'use strict';
-const util = require('../index.js');
+const util = require('../lib/yyl-util');
 const expect = require('chai').expect;
 const fs = require('fs');
 const extFs = require('yyl-fs');
 const path = require('path');
 
+
 const TEST_CTRL = {
+  CMD_PARSE: true,
   ENV_STRINGIFY: true,
   ENV_PARSE: true,
   REQUIRE_JS: true,
@@ -39,6 +41,38 @@ const fn = {
     }
   }
 };
+
+if (TEST_CTRL.CMD_PARSE) {
+  describe('util.cmdParse(processArgv)', () => {
+    it('usage test', () => {
+      const testArr = [{
+        input: 'npm i yyl -g --verbose'.split(' '),
+        output: {
+          cmds: ['npm', 'i', 'yyl'],
+          shortEnv: {
+            'g': true
+          },
+          env: {
+            verbose: true
+          }
+        }
+      }, {
+        input: 'nightwatch ./src/a.js ./test --verbose'.split(' '),
+        output: {
+          cmds: ['nightwatch', './src/a.js', './test'],
+          env: {
+            verbose: true
+          },
+          shortEnv: {}
+        }
+      }];
+
+      testArr.forEach((item) => {
+        expect(util.cmdParse([''].concat(item.input))).to.deep.equal(item.output);
+      });
+    });
+  });
+}
 
 if (TEST_CTRL.ENV_STRINGIFY) {
   describe('util.envStringify(obj)', () => {

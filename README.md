@@ -4,6 +4,15 @@ a node util for yyl
 * yyl-util 已根据功能拆分为 `yyl-os`, `yyl-fs`, `yyl-file-replacer`, `yyl-print`
 
 ## API 说明
+### util.cmdParse(processArgv)
+```
+/**
+ * 将 process.argv 转成 obj 形式
+ * @param  {Array} processArgv process.argv 对象
+ * @return { cmds, env, shortEnv }
+ */
+ util.cmdParse(processArgv);
+```
 ### util.envStringify(obj);
 ```
 /**
