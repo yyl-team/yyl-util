@@ -1,6 +1,6 @@
 {
   "name": "yyl-util",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "description": "node function util",
   "main": "lib/yyl-util.js",
   "types": "lib/yyl-util.d.ts",
