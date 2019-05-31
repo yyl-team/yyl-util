@@ -44,31 +44,143 @@ const fn = {
 
 if (TEST_CTRL.CMD_PARSE) {
   describe('util.cmdParse(processArgv)', () => {
-    it('usage test', () => {
-      const testArr = [{
-        input: 'npm i yyl -g --verbose'.split(' '),
-        output: {
-          cmds: ['npm', 'i', 'yyl'],
-          shortEnv: {
-            'g': true
-          },
-          env: {
-            verbose: true
-          }
+    const testArr = [{
+      input: 'npm i yyl -g --verbose'.split(' '),
+      output: {
+        cmds: ['npm', 'i', 'yyl'],
+        shortEnv: {
+          'g': true
+        },
+        env: {
+          verbose: true
         }
-      }, {
-        input: 'nightwatch ./src/a.js ./test --verbose'.split(' '),
-        output: {
-          cmds: ['nightwatch', './src/a.js', './test'],
-          env: {
-            verbose: true
-          },
-          shortEnv: {}
+      }
+    }, {
+      input: 'nightwatch ./src/a.js ./test --verbose'.split(' '),
+      output: {
+        cmds: ['nightwatch', './src/a.js', './test'],
+        env: {
+          verbose: true
+        },
+        shortEnv: {}
+      }
+    }, {
+      input: 'nightwatch --verbose ./src/a.js'.split(' '),
+      typeMap: {
+        env: {
+          verbose: Boolean
         }
-      }];
+      },
+      output: {
+        cmds: ['nightwatch', './src/a.js'],
+        env: {
+          verbose: true
+        },
+        shortEnv: {}
+      }
+    }, {
+      input: 'nightwatch --verbose false ./src/a.js'.split(' '),
+      typeMap: {
+        env: {
+          verbose: Boolean
+        }
+      },
+      output: {
+        cmds: ['nightwatch', './src/a.js'],
+        env: {
+          verbose: false
+        },
+        shortEnv: {}
+      }
+    }, {
+      input: 'nightwatch --verbose 0 ./src/a.js'.split(' '),
+      typeMap: {
+        env: {
+          verbose: Boolean
+        }
+      },
+      output: {
+        cmds: ['nightwatch', '0', './src/a.js'],
+        env: {
+          verbose: true
+        },
+        shortEnv: {}
+      }
+    }, {
+      input: 'nightwatch -v false ./src/a.js'.split(' '),
+      typeMap: {
+        shortEnv: {
+          v: Boolean
+        }
+      },
+      output: {
+        cmds: ['nightwatch', './src/a.js'],
+        env: {},
+        shortEnv: {
+          v: false
+        }
+      }
+    }, {
+      input: 'nightwatch -v false./src/a.js'.split(' '),
+      typeMap: {
+        shortEnv: {
+          v: Boolean
+        }
+      },
+      output: {
+        cmds: ['nightwatch', 'false./src/a.js'],
+        env: {},
+        shortEnv: {
+          v: true
+        }
+      }
+    }, {
+      input: 'nightwatch --verbose ./src/a.js'.split(' '),
+      typeMap: {
+        env: {
+          verbose: Number
+        }
+      },
+      output: {
+        cmds: ['nightwatch', './src/a.js'],
+        env: {
+          verbose: 1
+        },
+        shortEnv: {}
+      }
+    }, {
+      input: 'nightwatch --verbose 12 ./src/a.js'.split(' '),
+      typeMap: {
+        env: {
+          verbose: Number
+        }
+      },
+      output: {
+        cmds: ['nightwatch', './src/a.js'],
+        env: {
+          verbose: 12
+        },
+        shortEnv: {}
+      }
+    }, {
+      input: 'nightwatch -v 12./src/a.js'.split(' '),
+      typeMap: {
+        shortEnv: {
+          v: Number
+        }
+      },
+      output: {
+        cmds: ['nightwatch', '12./src/a.js'],
+        env: {},
+        shortEnv: {
+          v: 1
+        }
+      }
+    }];
 
-      testArr.forEach((item) => {
-        expect(util.cmdParse([''].concat(item.input))).to.deep.equal(item.output);
+    testArr.forEach((item) => {
+      it(`util.cmdParse(${item.input.join(' ')}, ${item.typeMap ? JSON.stringify(item.typeMap) : ''})`, () => {
+        expect(util.cmdParse([''].concat(item.input), item.typeMap)).to.deep.equal(item.output);
       });
     });
   });

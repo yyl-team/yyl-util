@@ -1,4 +1,6 @@
 # 版本信息
+## 2.3.2(2019-05-31)
+* [EDIT] `util.cmdParse(process.argv, typeMap)` 新增 `typeMap` 用于定义 env 的类型, 如是 boolean 类型 则可省略后面的参数，如 `--remote`
 ## 2.3.1(2019-05-21)
 * [FIX] 入口写错了
 

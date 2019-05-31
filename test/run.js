@@ -1,3 +1,4 @@
 const util = require('../lib/yyl-util');
 
-console.log(util.matchVersion('1.0.0', '1.0.0'));
+console.log(util.cmdParse('aa nightwatch -v false ./src/a.js'.split(' '), { env: { v: Boolean}}));
+
