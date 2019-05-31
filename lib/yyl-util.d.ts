@@ -5,7 +5,7 @@ type anyObj = { [key: string]: any };
 
 interface IUtil {
   forEach(arr: any[], fn: callback): Promise<any>;
-  cmdParse(processArgv: string[]): ICmdParseResult;
+  cmdParse(processArgv: string[], typeMap?: ITypeMap): ICmdParseResult;
   shortEnvParse(argv: string[]): anyObj;
   shortEnvStringify(obj: anyObj): string;
   makeAsync(fn: callback, isMocha: boolean): callback;
@@ -22,6 +22,11 @@ interface IUtil {
   requireJs(iPath: string): any;
   path: IUtilPath;
 }
+interface ITypeMap {
+  env?: anyObj,
+  shortEnv?: anyObj
+}
+
 interface IUtilPath {
   join(...argv: string[]): string;
   relative(...argv: string[]): string;
