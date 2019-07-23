@@ -1,4 +1,7 @@
 # 版本信息
+## 2.3.5(2019-07-23)
+* [FIX] 修复 `util.matchVersion(ver1, ver)` 遇到 `github:xxx` version 时 处理不了问题
+
 ## 2.3.3(2019-06-01)
 * [ADD] npm publish ignore .git file
 ## 2.3.2(2019-05-31)

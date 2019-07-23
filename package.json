@@ -1,6 +1,6 @@
 {
   "name": "yyl-util",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "description": "node function util",
   "main": "lib/yyl-util.js",
   "types": "lib/yyl-util.d.ts",
@@ -17,7 +17,7 @@
   "author": "jackness Lau",
   "license": "ISC",
   "engines": {
-    "node": ">= 8.0.0"
+    "node": ">= 10.0.0"
   },
   "bugs": {
     "url": "https://github.com/jackness1208/yyl-util/issues"

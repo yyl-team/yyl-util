@@ -7,7 +7,7 @@ const path = require('path');
 
 
 const TEST_CTRL = {
-  CMD_PARSE: true,
+  CverboseMD_PARSE: true,
   ENV_STRINGIFY: true,
   ENV_PARSE: true,
   REQUIRE_JS: true,
@@ -484,6 +484,8 @@ if (TEST_CTRL.MATCH_VERSION) {
       expect(util.matchVersion('2.0.1', '2.0.2')).to.equal(false);
 
       expect(util.matchVersion('v2.1.0', 'v2.1.0')).to.equal(true);
+      expect(util.matchVersion('v2.1.0', 'v2.1.0')).to.equal(true);
+      expect(util.matchVersion('1.1.1', 'github:tj/react-click-outside')).to.equal(false);
     });
   });
 }
