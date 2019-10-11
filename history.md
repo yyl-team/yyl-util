@@ -1,4 +1,7 @@
 # 版本信息
+## 2.3.7(2019-10-11)
+* fix: 修复 `util.cmdProcess` cmds 在 node xx.js 情况下参数获取不正确问题
+
 ## 2.3.6(2019-09-25)
 * feat: 修改 `util.requireJs` 实现方式
 * feat: 补充 d.ts 注释
