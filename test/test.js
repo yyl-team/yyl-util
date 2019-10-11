@@ -177,6 +177,21 @@ if (TEST_CTRL.CMD_PARSE) {
           v: 1
         }
       }
+    }, {
+      input: [
+        'C:\\Program Files\\nodejs\\node.exe',
+        'F:\\github\\yyl-concat-webpack-plugin\\test\\commander.js',
+        'watch',
+        '--path',
+        './test/case/base/'
+      ].join(' '),
+      output: {
+        cmds: ['watch'],
+        env: {
+          path: './test/case/base/'
+        },
+        shortEnv: {}
+      }
     }];
 
     testArr.forEach((item) => {
