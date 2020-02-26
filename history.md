@@ -1,4 +1,8 @@
 # 版本信息
+## 2.3.8(2020-02-26)
+* fix: 修复 `util.path.resolve` 在执行 `util.path.resolve('//www.yy.com', 'a.html')` 时结果不符合预期的bug
+* fix: 重新 划分 单元测试
+
 ## 2.3.7(2019-10-11)
 * fix: 修复 `util.cmdProcess` cmds 在 node xx.js 情况下参数获取不正确问题
 

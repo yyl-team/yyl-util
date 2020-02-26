@@ -1,11 +1,13 @@
 {
   "name": "yyl-util",
-  "version": "2.3.7",
+  "version": "2.3.8",
   "description": "node function util",
   "main": "lib/yyl-util.js",
   "types": "lib/yyl-util.d.ts",
   "scripts": {
-    "test": "mocha ./test/test.js"
+    "test": "mocha ./test/mocha/",
+    "test:cmdParse": "mocha ./test/mocha/cmdParse.test.js",
+    "test:path": "mocha ./test/mocha/path.test.js"
   },
   "repository": {
     "type": "git",
