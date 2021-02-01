@@ -9,7 +9,7 @@ interface IUtil {
    * @param arr 任意数组
    * @param fn Promise 类回调函数
    */
-  forEach(arr: any[], fn: callback): Promise<any>;
+  forEach<T=any>(arr: T[], fn: (item: T) => Promise<void>): Promise<T>;
   /**
    * cmd 解析
    * @param processArgv process.env
