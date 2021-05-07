@@ -1,0 +1,26 @@
+{
+  "name": "yyl-util.foreach",
+  "version": "0.1.0",
+  "description": "foreach lib",
+  "author": "liudaojie <liudaojie@yy.com>",
+  "homepage": "https://github.com/yyl-team/yyl-util#readme",
+  "license": "ISC",
+  "main": "lib/yyl-util.foreach.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yyl-team/yyl-util.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/yyl-team/yyl-util/issues"
+  }
+}
