@@ -3,6 +3,7 @@
 dist/**
 **/dist/**
 output/**
+**/output/**
 node_modules/**
 *.yml
 .gitignore
