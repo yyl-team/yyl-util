@@ -2,7 +2,7 @@
 ## 2.3.9(2020-02-01)
 * fix: 调整 `yyl.forEach` 类型
 ## 2.3.8(2020-02-26)
-* fix: 修复 `util.path.resolve` 在执行 `util.path.resolve('//www.yy.com', 'a.html')` 时结果不符合预期的bug
+* fix: 修复 `util.path.resolve` 在执行 `util.path.resolve('//www.testhost.com', 'a.html')` 时结果不符合预期的bug
 * fix: 重新 划分 单元测试
 
 ## 2.3.7(2019-10-11)
@@ -192,7 +192,7 @@
 * feat: util.openBrowser() 支持不带协议的 url 打开
 
 ## 1.3.5(2017-06-22)
-* fix: 修复 util.joinFormat //www.yy.com 类似这样没指定协议的路径时匹配返回不正确问题
+* fix: 修复 util.joinFormat //www.testhost.com 类似这样没指定协议的路径时匹配返回不正确问题
 
 ## 1.3.0(2017-06-19)
 * fix: 新增 util.taskQueue 方法 用于gulp watch 队列执行
