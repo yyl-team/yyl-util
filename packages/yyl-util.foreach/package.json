@@ -5,7 +5,8 @@
   "author": "liudaojie <liudaojie@yy.com>",
   "homepage": "https://github.com/yyl-team/yyl-util#readme",
   "license": "ISC",
-  "main": "lib/yyl-util.foreach.js",
+  "main": "output/index.js",
+  "types": "output/index.d.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -18,7 +19,8 @@
     "url": "git+https://github.com/yyl-team/yyl-util.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "build": "rollup --config ./rollup.config.js"
   },
   "bugs": {
     "url": "https://github.com/yyl-team/yyl-util/issues"

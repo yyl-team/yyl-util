@@ -1,4 +1,6 @@
 import pkg from './package.json'
+import fs from 'fs'
+import path from 'path'
 import typescript from 'rollup-plugin-typescript2'
 import commonjs from '@rollup/plugin-commonjs'
 import nodeResolve from '@rollup/plugin-node-resolve'
@@ -14,6 +16,21 @@ function buildBanner(type) {
     ' */'
   ].join('\n')
 }
+
+function makeConfig () {
+  const pkgPath = path.join(__dirname, './packages')
+  const pkgNames = fs.readdirSync(pkgPath)
+  const buildPkgArr = []
+  Object.keys(process.env).forEach((key) => {
+    if (pkgNames.includes(key)) {
+      buildPkgArr.push(key)
+    }
+  })
+
+  console.log('buildPkgArr', buildPkgArr)
+}
+
+makeConfig()
 
 const config = {
   input: './src/index.ts',
