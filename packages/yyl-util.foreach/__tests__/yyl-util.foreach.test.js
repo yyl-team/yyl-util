@@ -1,7 +1,6 @@
-'use strict';
-
-const yylUtil.foreach = require('..');
+'use strict'
+const { forEach } = require('../')
 
 describe('yyl-util.foreach', () => {
-    it('needs tests');
-});
+  it('needs tests')
+})

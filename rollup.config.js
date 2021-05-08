@@ -16,7 +16,7 @@ function buildBanner({ type, pkg }) {
   ].join('\n')
 }
 
-function makeConfig () {
+function makeConfig() {
   const pkgPath = path.join(__dirname, './packages')
   const pkgNames = fs.readdirSync(pkgPath).filter((name) => !/^\./.test(name))
   let buildPkgArr = []
@@ -33,19 +33,21 @@ function makeConfig () {
     buildPkgArr = pkgNames
   }
 
-  contexts = contexts.concat(buildPkgArr.map(iPath => path.join(pkgPath, iPath)))
+  contexts = contexts.concat(buildPkgArr.map((iPath) => path.join(pkgPath, iPath)))
 
   return contexts
     .filter((context) => fs.existsSync(path.join(context, 'package.json')))
     .map((context) => ({
       input: path.join(context, './src/index.ts'),
-      output: [{
-        file: path.join(context, './output/index.js'),
-        format: 'cjs',
-        banner: buildBanner({ type: 'cjs', pkg: require(path.join(context, 'package.json'))}),
-        exports: 'named',
-        sourcemap: false
-      }],
+      output: [
+        {
+          file: path.join(context, './output/index.js'),
+          format: 'cjs',
+          banner: buildBanner({ type: 'cjs', pkg: require(path.join(context, 'package.json')) }),
+          exports: 'named',
+          sourcemap: false
+        }
+      ],
       plugins: [
         external({
           deps: true

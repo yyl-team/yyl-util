@@ -28,13 +28,12 @@
     "bootstrap": "yarn install & npm run prettier",
     "eslint": "eslint --ext=jsx,ts,tsx ./",
     "prettier": "prettier --write ./**",
-    "dev": "rollup --config ./rollup.config.js",
+    "dev": "rollup --config ./rollup.config.js --environment",
     "d": "rollup --config ./rollup.config.js --environment",
-    "build": "cross-env NODE_ENV=production rollup --config ./rollup.config.js",
-    "w": "rollup --watch --config ./rollup.config.js",
-    "prepublishOnly": "npm run prettier & npm test & npm run doc",
-    "doc": "typedoc src/index.ts --plugin typedoc-plugin-markdown",
-    "test": "npm run build & jest ./test/jest/"
+    "build": "cross-env NODE_ENV=production rollup --config ./rollup.config.js --environment",
+    "w": "rollup --watch --config ./rollup.config.js --environment",
+    "prepublishOnly": "npm run prettier & npm test doc",
+    "test": "npm run build & jest --env=packages"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.1.0",
