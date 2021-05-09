@@ -1,0 +1,28 @@
+{
+  "name": "yyl-util.waitfor",
+  "version": "3.0.0",
+  "description": "> TODO: description",
+  "author": "liudaojie <liudaojie@yy.com>",
+  "homepage": "https://github.com/yyl-team/yyl-util#readme",
+  "license": "ISC",
+  "main": "output/index.js",
+  "types": "output/index.d.ts",
+  "directories": {
+    "src": "src",
+    "output": "output",
+    "test": "__tests__"
+  },
+  "files": [
+    "output"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yyl-team/yyl-util.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/yyl-team/yyl-util/issues"
+  }
+}

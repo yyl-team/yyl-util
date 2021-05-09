@@ -12,6 +12,7 @@
     "output"
   ],
   "dependencies": {
-    "yyl-util.foreach": "^0.1.0"
+    "yyl-util.foreach": "^3.0.0",
+    "yyl-util.waitfor": "^3.0.0"
   }
 }

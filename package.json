@@ -28,7 +28,6 @@
     "bootstrap": "yarn install & npm run prettier",
     "eslint": "eslint --ext=jsx,ts,tsx ./",
     "prettier": "prettier --write ./**",
-    "dev": "rollup --config ./rollup.config.js --environment",
     "d": "rollup --config ./rollup.config.js --environment",
     "build": "cross-env NODE_ENV=production rollup --config ./rollup.config.js --environment",
     "w": "rollup --watch --config ./rollup.config.js --environment",
@@ -57,6 +56,8 @@
   "description": "yyl util lerna manage",
   "repository": "https://github.com/yyl-team/yyl-util.git",
   "author": "jackness1208",
-  "workspaces": ["./packages/*"],
+  "workspaces": [
+    "./packages/*"
+  ],
   "license": "MIT"
 }
