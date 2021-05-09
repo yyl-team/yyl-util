@@ -3,6 +3,14 @@
   "version": "3.0.0",
   "main": "./output/index.js",
   "types": "./output/index.d.ts",
+  "directories": {
+    "src": "src",
+    "output": "output",
+    "test": "__tests__"
+  },
+  "files": [
+    "output"
+  ],
   "dependencies": {
     "yyl-util.foreach": "^0.1.0"
   }
