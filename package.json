@@ -1,7 +1,6 @@
 {
   "version": "3.0.0",
-  "main": "output/index.js",
-  "types": "output/index.d.ts",
+  "private": true,
   "eslintConfig": {
     "env": {
       "jest": true
@@ -13,6 +12,7 @@
   "eslintIgnore": [
     "/node_modules",
     "/output",
+    "**/output",
     "/test"
   ],
   "prettier": {
@@ -53,9 +53,10 @@
     "typedoc-plugin-markdown": "^3.4.5",
     "typescript": "^4.1.3"
   },
-  "name": "yyl-util",
-  "description": "yyl util",
+  "name": "yyl-util.lerna",
+  "description": "yyl util lerna manage",
   "repository": "https://github.com/yyl-team/yyl-util.git",
   "author": "jackness1208",
+  "workspaces": ["./packages/*"],
   "license": "MIT"
 }

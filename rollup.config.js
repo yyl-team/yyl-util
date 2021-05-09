@@ -28,9 +28,11 @@ function makeConfig() {
 
   let contexts = []
   if (!buildPkgArr.length) {
-    /** 加入根目录构建 */
-    contexts.push(__dirname)
+    // /** 加入根目录构建 */
+    // contexts.push(__dirname)
     buildPkgArr = pkgNames
+    buildPkgArr.splice(buildPkgArr.indexOf('yyl-util'), 1)
+    buildPkgArr.push('yyl-util')
   }
 
   contexts = contexts.concat(buildPkgArr.map((iPath) => path.join(pkgPath, iPath)))

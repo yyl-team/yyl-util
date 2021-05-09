@@ -1,0 +1,9 @@
+{
+  "name": "yyl-util",
+  "version": "3.0.0",
+  "main": "./output/index.js",
+  "types": "./output/index.d.ts",
+  "dependencies": {
+    "yyl-util.foreach": "^0.1.0"
+  }
+}
