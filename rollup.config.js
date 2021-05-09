@@ -52,6 +52,7 @@ function makeConfig() {
       ],
       plugins: [
         external({
+          packagePath: path.join(context, 'package.json'),
           deps: true
         }),
         nodeResolve({ jsnext: true }),
