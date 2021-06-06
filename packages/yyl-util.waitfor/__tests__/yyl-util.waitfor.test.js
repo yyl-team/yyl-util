@@ -1,5 +1,3 @@
-'use strict'
-
 const { waitFor } = require('..')
 
 describe('yyl-util.waitfor', () => {

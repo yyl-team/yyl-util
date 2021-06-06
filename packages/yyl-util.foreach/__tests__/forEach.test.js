@@ -1,7 +1,7 @@
 'use strict'
-const { forEach } = require('../')
+const { forEach } = require('../output')
 
-describe('yyl-util.foreach', () => {
+describe('forEach', () => {
   it('usage test', async () => {
     let count = 0
     await forEach([1, 2, 3], async (num) => {

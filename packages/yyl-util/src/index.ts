@@ -1,2 +1,7 @@
 export * from 'yyl-util.foreach'
 export * from 'yyl-util.waitfor'
+export * from 'yyl-util.cmdparse'
+export * from 'yyl-util.makecssjsdate'
+export * from 'yyl-util.path'
+export * from 'yyl-util.type'
+export * from 'yyl-util.version'

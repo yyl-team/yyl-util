@@ -7,17 +7,31 @@ export interface AnyObj {
   [key: string]: any
 }
 
-export interface CmdParseTypeMap {
-  env?: AnyObj
-  shortEnv?: AnyObj
+export interface CmdTypeDefined {
+  [key: string]: BooleanConstructor | StringConstructor | NumberConstructor
+}
+
+export interface CmdParseDefineMap {
+  env?: CmdTypeDefined
+  shortEnv?: CmdTypeDefined
+}
+
+export interface CmdParseResult {
+  cmds: string[]
+  env: {
+    [key: string]: boolean | number | string
+  }
+  shortEnv: {
+    [key: string]: boolean | number | string
+  }
 }
 
 /**
  * cmd 解析
  * @param processArgv process.env
- * @param typeMap 类型 map
+ * @param typeMap 类型校验 map
  */
-export function cmdParse(processArgv: string[], typeMap?: CmdParseTypeMap) {
+export function cmdParse(processArgv: string[], typeMap?: CmdParseDefineMap) {
   let iArgv = []
   if (processArgv[0].match(REG.NODE_HANDLE)) {
     iArgv = processArgv.slice(2)
@@ -26,10 +40,14 @@ export function cmdParse(processArgv: string[], typeMap?: CmdParseTypeMap) {
   }
   const SHORT_ENV_REG = /^-(\w+)/
   const ENV_REG = /^--(\w+)/
-  const r = {
+  const r: CmdParseResult = {
     cmds: [],
     env: {},
     shortEnv: {}
+  }
+
+  if (!typeMap) {
+    typeMap = {}
   }
 
   for (let i = 0, key = '', nextKey = '', len = iArgv.length; i < iArgv.length; i++) {
@@ -38,7 +56,7 @@ export function cmdParse(processArgv: string[], typeMap?: CmdParseTypeMap) {
     if (key.match(SHORT_ENV_REG) || key.match(ENV_REG)) {
       // shortEnv | env
       let realKey: string
-      let handle: keyof CmdParseTypeMap
+      let handle: keyof CmdParseDefineMap
       if (key.match(SHORT_ENV_REG)) {
         handle = 'shortEnv'
         realKey = key.replace(SHORT_ENV_REG, '$1')
@@ -47,12 +65,15 @@ export function cmdParse(processArgv: string[], typeMap?: CmdParseTypeMap) {
         realKey = key.replace(ENV_REG, '$1')
       }
 
+      const iType = typeMap[handle]
+      const iVal = iType ? iType[realKey] : undefined
+
       let val: boolean | number | string
       if (i >= len - 1 || nextKey.match(SHORT_ENV_REG) || nextKey.match(ENV_REG)) {
         val = true
-      } else if (typeof typeMap === 'object' && typeMap[handle] && typeMap[handle][realKey]) {
+      } else if (iType && iVal) {
         // boolean 类型
-        switch (typeMap[handle][realKey]) {
+        switch (iVal) {
           case Boolean:
             if (nextKey === 'true') {
               val = true
@@ -105,7 +126,6 @@ export function cmdParse(processArgv: string[], typeMap?: CmdParseTypeMap) {
  * @param argv process.env
  */
 export function shortEnvParse(argv: string | string[]) {
-  const self = this
   let iArgv: string[]
   if (typeof argv === 'string') {
     iArgv = argv.split(/\s+/)
@@ -113,7 +133,7 @@ export function shortEnvParse(argv: string | string[]) {
     iArgv = Array.from(argv)
   }
   iArgv = [''].concat(iArgv)
-  const { shortEnv } = self.cmdParse(iArgv)
+  const { shortEnv } = cmdParse(iArgv)
   return shortEnv
 }
 
@@ -122,7 +142,7 @@ export function shortEnvParse(argv: string | string[]) {
  * @param obj 变量集合
  */
 export function shortEnvStringify(obj: AnyObj) {
-  const r = []
+  const r: string[] = []
   if (typeof obj !== 'object') {
     throw new Error(`util.envStringify error, obj type error: ${typeof obj}`)
   }
@@ -142,7 +162,7 @@ export function shortEnvStringify(obj: AnyObj) {
  * @param obj 对象
  */
 export function envStringify(obj: AnyObj) {
-  const r = []
+  const r: string[] = []
   if (typeof obj !== 'object') {
     throw new Error(`util.envStringify error, obj type error: ${typeof obj}`)
   }
