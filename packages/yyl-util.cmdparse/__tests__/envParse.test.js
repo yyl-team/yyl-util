@@ -1,5 +1,4 @@
 const { envParse } = require('../')
-const { expect } = require('chai')
 
 describe('envParse(argv)', () => {
   it('function test', () => {

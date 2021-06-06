@@ -1,5 +1,4 @@
 const { compareVersion } = require('../')
-const expect = require('chai').expect
 
 describe('compareVersion(v1, v2)', () => {
   it('normal compare', () => {
@@ -18,6 +17,6 @@ describe('compareVersion(v1, v2)', () => {
     expect(compareVersion('~2.1.0', '2.1.0')).toEqual(0)
     expect(compareVersion('^2.1.0', '2.1.0')).toEqual(0)
     expect(compareVersion('v2.1.0', '2.1.0')).toEqual(0)
-    expect(compareVersion(1, 1)).to.equal(0)
+    expect(compareVersion(1, 1)).toEqual(0)
   })
 })

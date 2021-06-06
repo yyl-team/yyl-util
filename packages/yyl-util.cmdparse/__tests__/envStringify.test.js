@@ -1,5 +1,4 @@
 const { envStringify } = require('../')
-const { expect } = require('chai')
 
 describe('envStringify(obj)', () => {
   it('string test', () => {

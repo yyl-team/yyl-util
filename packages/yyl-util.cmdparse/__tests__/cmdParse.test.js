@@ -150,7 +150,7 @@ describe('cmdParse(processArgv)', () => {
     it(`util.cmdParse(${item.input.join(' ')}, ${
       item.typeMap ? JSON.stringify(item.typeMap) : ''
     })`, () => {
-      expect(cmdParse([''].concat(item.input), item.typeMap)).to.deep.equal(item.output)
+      expect(cmdParse([''].concat(item.input), item.typeMap)).toEqual(item.output)
     })
   })
 

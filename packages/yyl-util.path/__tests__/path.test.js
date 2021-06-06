@@ -1,4 +1,5 @@
 const { pathFormat } = require('../')
+const path = require('path')
 
 describe('pathFormat.join() test', () => {
   it('web url test', () => {
@@ -21,11 +22,12 @@ describe('pathFormat.relative() test', () => {
 
 describe('pathFormat.resolve() test', () => {
   it('file path test', () => {
-    expect(pathFormat.resolve('./../test/', './../test2/1.md')).toEqual(
-      pathFormat.join(__dirname, '../../../test2/1.md')
+    console.log(__dirname)
+    expect(pathFormat.resolve(__dirname, './../test2/1.md')).toEqual(
+      pathFormat.join(__dirname, '../test2/1.md')
     )
-    expect(pathFormat.resolve('.\\..\\test\\', '.\\..\\test2\\1.md')).toEqual(
-      pathFormat.join(__dirname, '../../../test2/1.md')
+    expect(pathFormat.resolve(__dirname.split(path.sep).join('\\'), '.\\..\\test2\\1.md')).toEqual(
+      pathFormat.join(__dirname, '../test2/1.md')
     )
     expect(pathFormat.resolve('//www.testhost.com', 'pc/html/helloworld.html')).toEqual(
       '//www.testhost.com/pc/html/helloworld.html'

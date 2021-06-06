@@ -176,3 +176,20 @@ export function envStringify(obj: AnyObj) {
   })
   return r.join(' ')
 }
+
+/**
+ * cmd 解析 --path 1 => {path: 1}
+ * @param env process.env
+ */
+export function envParse(argv: string | string[]) {
+  let iArgv
+  if (typeof argv === 'string') {
+    iArgv = argv.split(/\s+/)
+  } else {
+    iArgv = Array.from(argv)
+  }
+  iArgv = [''].concat(iArgv)
+
+  const { env } = cmdParse(iArgv)
+  return env
+}
