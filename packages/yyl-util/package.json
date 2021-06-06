@@ -12,7 +12,12 @@
     "output"
   ],
   "dependencies": {
+    "yyl-util.cmdparse": "^3.0.0",
     "yyl-util.foreach": "^3.0.0",
+    "yyl-util.makecssjsdate": "^3.0.0",
+    "yyl-util.path": "^3.0.0",
+    "yyl-util.type": "^3.0.0",
+    "yyl-util.version": "^3.0.0",
     "yyl-util.waitfor": "^3.0.0"
   }
 }

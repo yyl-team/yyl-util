@@ -38,7 +38,7 @@ export function cmdParse(processArgv: string[], typeMap?: CmdParseTypeMap) {
     if (key.match(SHORT_ENV_REG) || key.match(ENV_REG)) {
       // shortEnv | env
       let realKey: string
-      let handle: string
+      let handle: keyof CmdParseTypeMap
       if (key.match(SHORT_ENV_REG)) {
         handle = 'shortEnv'
         realKey = key.replace(SHORT_ENV_REG, '$1')
@@ -47,7 +47,7 @@ export function cmdParse(processArgv: string[], typeMap?: CmdParseTypeMap) {
         realKey = key.replace(ENV_REG, '$1')
       }
 
-      let val
+      let val: boolean | number | string
       if (i >= len - 1 || nextKey.match(SHORT_ENV_REG) || nextKey.match(ENV_REG)) {
         val = true
       } else if (typeof typeMap === 'object' && typeMap[handle] && typeMap[handle][realKey]) {

@@ -3,7 +3,7 @@
  */
 export function makeCssJsDate() {
   const now = new Date()
-  const addZero = function (num) {
+  const addZero = function (num: number) {
     return num < 10 ? `0${num}` : `${num}`
   }
   return (
