@@ -1,0 +1,17 @@
+{
+  "main": "output/index.js",
+  "types": "output/index.d.ts",
+  "directories": {
+    "src": "src",
+    "output": "output",
+    "test": "__tests__"
+  },
+  "files": [
+    "output"
+  ],
+  "name": "yyl-util.version",
+  "version": "3.0.0",
+  "repository": "https://github.com/yyl-team/yyl-util.git",
+  "author": "jackness1208",
+  "license": "MIT"
+}
