@@ -29,10 +29,17 @@
     "eslint": "eslint --ext=jsx,ts,tsx ./",
     "prettier": "prettier --write ./**",
     "d": "rollup --config ./rollup.config.js --environment",
-    "build": "cross-env NODE_ENV=production rollup --config ./rollup.config.js --environment",
+    "build": "cross-env NODE_ENV=production rollup --config ./rollup.config.js --environment all",
     "w": "rollup --watch --config ./rollup.config.js --environment",
-    "prepublishOnly": "npm run prettier & npm test doc",
-    "test": "jest"
+    "prepublishOnly": "npm run prettier && npm run build && npm test",
+    "test": "jest",
+    "test:cmdparse": "jest ./packages/yyl-util.cmdparse",
+    "test:foreach": "jest ./packages/yyl-util.foreach",
+    "test:makecssjsdate": "jest ./packages/yyl-util.makecssjsdate",
+    "test:path": "jest ./packages/yyl-util.path",
+    "test:type": "jest ./packages/yyl-util.type",
+    "test:version": "jest ./packages/yyl-util.version",
+    "test:waitfor": "jest ./packages/yyl-util.waitfor"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.1.0",
